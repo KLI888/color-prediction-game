@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style/withdraw.css">
+    <link rel="stylesheet" href="/static/style/utils.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <section class="main_section">
+        <header>
+            <div class="navbar">
+                <div class="nav_back">
+                    <a href="/">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                </div>
+                <div class="nav_heading">
+                    <p>Withdraw</p>
+                </div>
+                <div>
+                    <a href="">
+                        <p>Withdraw history</p>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="deposite_balance">
+                <div>
+                    <p><i class="ri-wallet-fill"></i> Available Balance</p>
+                    <h2>₹{{profile.user_balance}}</h2>
+                </div>
+            </div>
+            <div class="deposite_amount">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="deposite_note">
+                        Need to add beneficiary information to be able to withdraw money
+                    </div>
+                    <div class="deposite_input">
+                        <div>
+                            <p>₹</p>
+                            <div class="vr_line"></div>
+                            <input type="text" name="amount" placeholder="0.00">
+                        </div>
+                        <i class="ri-close-circle-line"></i>
+                    </div>
+                    <div class="deposite_input">
+                        <div>
+                            <p><i class="ri-bank-fill"></i></p>
+                            <div class="vr_line"></div>
+                            <input type="text" name="upi_id" placeholder="Enter valid upi id or number">
+                        </div>
+                        <i class="ri-close-circle-line"></i>
+                    </div>
+                    <div class="deposite_btn">
+                        <input type="submit" value="Withdraw">
+                    </div>
+                </form>
+            </div>
+            <div class="recharge_instruction">
+                <div class="instruction_heading">
+                    <h1><i class="ri-git-repository-fill"></i> Withdraw instruction</h1>
+                </div>
+                <div class="instruction_content">
+                    <p><i class="ri-checkbox-circle-fill"></i> Need to bet ₹0.00 to be able to withdraw</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> Withdraw time 00:00-23:59</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> Withdrawal amount range ₹110.00-₹200,000.00</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> If your beneficial information is incorrect, please contact customer service</p>
+                </div>
+            </div>
+        </main>
+    </section>
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message|escapejs }}");
+            {% endfor %}
+        </script>
+    {% endif %}
+</body>
+
+</html>

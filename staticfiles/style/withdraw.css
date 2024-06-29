@@ -1,0 +1,140 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+}
+
+.navbar a i {
+    font-size: 30px;
+    color: #111;
+}
+
+.navbar .nav_heading p {
+    font-size: 20px;
+}
+
+.navbar a p {
+    color: #111;
+    font-size: 14px;
+}
+
+
+.deposite_balance {
+    margin: 10px 15px;
+    background: url('/static/assets/depositebg.png') no-repeat;
+    background-size: cover;
+    background-size: 100%;
+    background-position: center;
+    height: 25vh;
+    width: 93%;
+    padding: 20px;
+    color: #fff;
+}
+
+.deposite_balance i {
+    color: #FFE554;
+}
+.deposite_balance h2 {
+    font-size: 22px;
+    padding-top: 5px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.deposite_amount {
+    margin: 10px 15px;
+}
+.deposite_amount .deposite_input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eeeeee;
+    padding: 15px;
+    border-radius: 25px;
+    margin: 10px;
+
+}
+.deposite_input div {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+.deposite_input p {
+    font-size: 22px;
+    color: #F95959;
+    font-weight: bold;
+}
+
+.deposite_note {
+    color: #F95959;
+    font-size: 12px;
+    padding: 20px 0;
+}
+.deposite_input .vr_line {
+    height: 20px;
+    width: 1px;
+    background-color: gray;
+}
+.deposite_input input {
+    outline: none;
+    border: none;
+    background-color: #eeeeee;
+    font-weight: bold;
+    color: #F95959;
+}
+.deposite_input i {
+    font-size: 22px;    
+}
+
+.deposite_btn {
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.deposite_btn input {
+    padding: 15px;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 16px;
+    background: linear-gradient(90deg, #f95959 0%, #ff9a8e 100%);
+    outline: none;
+    border: none;
+    width: 100%;
+}
+
+
+.recharge_instruction {
+    margin: 0 15px;
+    padding-bottom: 30px;
+}
+.instruction_heading h1 {
+    font-size: 18px;
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    align-items: start;
+}
+.instruction_heading h1 i {
+    color: #F95959;
+    font-size: 22px;
+}
+
+.instruction_content {
+    margin-top: 20px;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid gray;
+}
+.instruction_content p {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+    margin: 15px 0;
+}
+.instruction_content p i {
+    color: #F95959;
+}

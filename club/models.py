@@ -1,0 +1,139 @@
+from django.db import models
+from django.contrib.auth.models import User
+from .utils import generate_ref_code
+
+
+# Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    code = models.CharField(max_length=50, default='', blank=True)
+    user_code = models.CharField(max_length=12, blank=True, null=True)
+    recomended_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='ref_by')
+    referals_number = models.IntegerField(blank=True, default=0)
+
+
+    user_balance = models.IntegerField(blank=True, default=0)
+
+    refer_code = models.CharField(max_length=50, blank=True, null=True)
+
+    total_balance = models.IntegerField(blank=True, default=0)
+    total_withdraw = models.IntegerField(blank=True, default=0)
+    total_deposite = models.IntegerField(blank=True, default=0)
+
+
+    def __str__(self):
+        return f"{self.user.username}"
+
+    def get_recommended_profiles(self):
+        pass
+
+    def save(self, *args, **kwargs):
+        if self.code == "":
+            code = generate_ref_code()
+            self.code = code
+        super().save(*args, **kwargs)
+
+from django.utils import timezone
+from django.db.models import Max
+
+class GameRound(models.Model):
+
+
+    game_id = models.IntegerField(default=20000000) 
+
+    start_hour = models.IntegerField(default=0)
+    start_minute = models.IntegerField(default=0)
+    start_second = models.IntegerField(default=0)
+
+
+    duration = models.IntegerField(default=30)
+    # created_at = models.DateTimeField(auto_now_add=True)
+
+    # class Meta:
+    #     get_latest_by = 'created_at'
+
+    def save(self, *args, **kwargs):
+        if self.game_id == 20000000:
+            max_id = GameRound.objects.aggregate(max_id=Max('game_id'))['max_id']
+            if max_id is None:
+                self.game_id = 20000000
+            else:
+                self.game_id = max_id + 1
+        super().save(*args, **kwargs)
+
+
+    @staticmethod
+    def give_round_details(game_id):
+        round = GameRound.objects.get(game_id=game_id)
+        data = {}
+        data['game_id'] = round.game_id
+        data['start_hour'] = round.start_hour
+        data['start_minute'] = round.start_minute
+        data['start_second'] = round.start_second
+        data['duration'] = round.duration
+
+        return data
+
+
+    @staticmethod
+    def create_new_round(hour, minute, second):
+        return GameRound.objects.create(
+            start_hour=hour,
+            start_minute=minute,
+            start_second=second
+        )
+
+
+    def __str__(self):
+        return f"{self.game_id}->{self.start_hour}:{self.start_minute}:{self.start_second}"
+    
+            
+
+
+
+class RoundWinColor(models.Model):
+    COLOR_CHOICES = [
+        ('Red', 'Red'),
+        ('Green', 'Green'),
+        ('Violet', 'Violet')
+    ]
+    round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
+    win_color = models.CharField(max_length=10, choices=COLOR_CHOICES, blank=True, null=True)
+    red_bet_amount = models.IntegerField(default=0)
+    green_bet_amount = models.IntegerField(default=0)
+    violet_bet_amount = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Round: {self.round.game_id}"
+    
+
+
+class Bet(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
+    color = models.CharField(max_length=10, default='red')
+    amount = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.user.username} - Bet on {self.color} in Round {self.round_id}"
+
+
+class Withdraw(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.CharField(max_length=50)
+    upi_id = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.user}->{self.amount}"
+
+
+class Deposit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.CharField(max_length=50)
+    utr_no = models.CharField(max_length=100)
+    payment_img = models.ImageField(upload_to="depositeScreenshot/")
+
+    def __str__(self):
+        return f"Deposite: {self.user}->{self.amount}"
+

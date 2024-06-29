@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style/deposite.css">
+    <link rel="stylesheet" href="/static/style/utils.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <section class="main_section">
+        <header>
+            <div class="navbar">
+                <div class="nav_back">
+                    <a href="/">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                </div>
+                <div class="nav_heading">
+                    <p>Deposite</p>
+                </div>
+                <div>
+                    <a href="">
+                        <p>Deposite history</p>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="deposite_balance">
+                <div>
+                    <p><i class="ri-wallet-fill"></i> Balance</p>
+                    <h2>₹{{profile.user_balance}}</h2>
+                </div>
+            </div>
+            <a href="https://razorpay.me/@investandearn" target="_blank" style="text-decoration: none;">
+            <div class="deposite_btn" style="padding: 10px 15px;">
+                <input type="button" value="Add Money First">
+            </div>
+            </a>
+            <div class="deposite_amount">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="deposite_input">
+                        <div>
+                            <p>₹</p>
+                            <div class="vr_line"></div>
+                            <input type="text" name="amount" placeholder="amount">
+                        </div>
+                        <i class="ri-close-circle-line"></i>
+                    </div>
+                    <div class="deposite_input" style="margin-top: 10px;">
+                        <div>
+                            <p>₹</p>
+                            <div class="vr_line"></div>
+                            <input type="text" name="utr_no" placeholder="utr number">
+                        </div>
+                        <i class="ri-close-circle-line"></i>
+                    </div>
+                    <div class="deposite_input" style="margin-top: 10px;">
+                        <div>
+                            <p>₹</p>
+                            <div class="vr_line"></div>
+                            <input type="file" name="payment_screenshot" placeholder="utr number">
+                        </div>
+                        <!-- <i class="ri-close-circle-line"></i> -->
+                    </div>
+                    <div class="deposite_btn">
+                        <input type="submit" value="Deposite">
+                    </div>
+                </form>
+            </div>
+            <div class="recharge_instruction">
+                <div class="instruction_heading">
+                    <h1><i class="ri-git-repository-fill"></i> Deposit instruction</h1>
+                </div>
+                <div class="instruction_content">
+                    <p><i class="ri-checkbox-circle-fill"></i> If the transfer time is up, please fill out the deposit form again.</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> The transfer amount must match the order you created, otherwise the money cannot be credited successfully.</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> If you transfer the wrong amount, our company will not be responsible for the lost amount!</p>
+                    <p><i class="ri-checkbox-circle-fill"></i> Note: do not cancel the deposit order after the money has been transferred.</p>
+                </div>
+            </div>
+        </main>
+    </section>
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message|escapejs }}");
+            {% endfor %}
+        </script>
+    {% endif %}
+</body>
+
+</html>

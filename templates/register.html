@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style/register.css">
+    <link rel="stylesheet" href="/static/style/utils.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+
+</head>
+<body>
+    <section class="main_section">
+        <header>
+            <div class="navbar">
+                <div class="nav_back">
+                    <a href="/"><i class="ri-arrow-left-s-line"></i></a>
+                </div>
+                <div class="nav_logo">
+                    <img src="/static/assets/logo2.png" alt="">
+                </div>
+                <div class="nav_lang">
+                    <p>EN</p>
+                </div>
+            </div>
+            <div class="form_details">
+                <p>Register</p>
+                <span>Please register by valid phone number</span>
+            </div>
+        </header>
+        <main>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form_heading">
+                    <div class="head_icon">
+                        <i class="ri-phone-lock-fill"></i>
+                    </div>
+                    <div class="head_text">
+                        <p>Register your phone</p>
+                    </div>
+                    <div class="head_hr"></div>
+                </div>
+                <div class="form_details">
+                    <div class="form_inputs">
+                        <label for=""><i class="ri-phone-line"></i>Phone number</label>
+                        <input required type="text" name="number" placeholder="Please enter the phone number">
+                    </div>
+                    <div class="form_inputs">
+                        <label for=""><i class="ri-lock-fill"></i>Set password</label>
+                        <input required type="text" name="password" placeholder="Set password">
+                    </div>
+                    <div class="form_inputs">
+                        <label for=""><i class="ri-lock-fill"></i>Confirm password</label>
+                        <input required type="text" name="con_password" placeholder="Confirm password">
+                    </div>
+                    {% comment %} <div class="form_inputs">
+                        <label for=""><i class="ri-group-fill"></i>Invite code</label>
+                        <input type="text" name="invite_code" placeholder="Confirm password">
+                    </div> {% endcomment %}
+                    <div class="form_policy">
+                        <input required type="radio" name="policy">
+                        <p>I have read and agree</p>
+                        <a href="">Privacy Agreement</a>
+                    </div>
+                    <div class="form_btn">
+                        <input type="submit" value="Register">
+                        <a href="/loginPage" class="log_btn">I have an account <span>Login</span></a>
+                    </div>
+
+                </div>
+            </form>
+        </main>
+    </section>
+</body>
+</html>

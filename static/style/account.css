@@ -1,0 +1,123 @@
+header {
+    height: 260px;
+    background: linear-gradient(90deg, #f95959 0%, #ff9a8e 100%);
+    border-radius: 0 0 50px 50px;
+}
+
+main {
+    padding-bottom: 215px;
+}
+
+.user_details {
+    padding: 20px 15px;
+    display: flex;
+    justify-content: star;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.user_details img {
+    width:  70px;
+    height: 70px;
+    border-radius: 100%;
+}
+
+.user_details .user_info p {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.user_details .user_info span {
+    background-color: #FEAA57;
+    padding: 5px 20px;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 50px;
+}
+
+.user_balance {
+    background: #fff;
+    padding: 20px;
+    border-radius: 25px;
+    margin: 20px 15px;
+}
+
+.user_balance p:first-child {
+    color: gray;
+}
+.user_balance span {
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+}
+.user_balance .hr_line {
+    margin: 10px 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgb(228, 228, 228);
+}
+
+.user_balance .balance_function {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+.user_balance .balance_function i {
+    color: #f95959;
+    font-size: 22px;
+}
+.user_balance .balance_function p {
+    color: gray;
+}
+
+
+.main_service {
+    margin: 100px 15px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 25px;
+}
+.main_service p:first-child {
+    font-size: 18px;
+    color: #111;
+    margin-bottom: 10px;
+} 
+
+.main_service .web_services {
+    display: flex;
+    justify-content: space-evenly;
+    align-self: center;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 50px;
+}
+.web_services i {
+    font-size: 22px;
+    color: #f95959;
+}
+.web_services p {
+    font-size: 12px;
+    color: gray;
+}
+
+.log_btn {
+    margin: 5px 15px;
+    text-align: center;
+}
+.log_btn a i {
+    font-size: 22px;
+}
+.log_btn a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #f95959;
+    padding: 10px 10px;
+    margin: auto;
+    border-radius: 25px;
+    color: #f95959;
+}

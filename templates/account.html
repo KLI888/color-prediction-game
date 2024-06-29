@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style/account.css">
+    <link rel="stylesheet" href="/static/style/utils.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"/>
+</head>
+<body>
+    <section class="main_section">
+        <header>
+            <div class="user_details">
+                <img src="/static/assets/user1.png" alt="" class="user_img">
+                <div class="user_info">
+                    <p>{{proflie.user_code}}</p>
+                    <span>UID | {{proflie.code}}</span>
+                </div>
+            </div>
+            <div class="user_balance">
+                <p>Total balance</p>
+                <span>₹ {{proflie.user_balance}}</span>
+                <div class="hr_line"></div>
+                <div class="balance_function">
+                    <a href="/walletPage">
+                        <div class="balance_func_card">
+                            <i class="ri-wallet-3-fill"></i>
+                            <p>Wallet</p>
+                        </div>
+                    </a>
+                    <a href="/depositePage">
+                        <div class="balance_func_card">
+                            <i class="ri-bank-fill"></i>
+                            <p>Deposit</p>
+                        </div>
+                    </a>
+                    <a href="/withdrawPage">
+                        <div class="balance_func_card">
+                            <i class="ri-bank-card-fill"></i>
+                            <p>Withdraw</p>
+                        </div>
+                    </a>
+                    <a href="/">
+                        <div class="balance_func_card">
+                            <i class="ri-vip-crown-fill"></i>
+                            <p>VIP</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="main_service">
+                <p>Service center</p>
+                <div class="web_services">
+                    <div class="service_card">
+                        <i class="ri-settings-4-fill"></i>
+                        <p>Settings</p>
+                    </div>
+                    <div class="service_card">
+                        <i class="ri-feedback-fill"></i>
+                        <p>Feedback</p>
+                    </div>
+                    <div class="service_card">
+                        <i class="ri-notification-off-fill"></i>
+                        <p>Notification</p>
+                    </div>
+                    <div class="service_card">
+                        <i class="ri-customer-service-2-fill"></i>
+                        <p>24/7 Customer <br> service</p>
+                    </div>
+                    <div class="service_card">
+                        <i class="ri-article-line"></i>
+                        <p>Beginner's Guide</p>
+                    </div>
+                    <div class="service_card">
+                        <i class="ri-box-1-fill"></i>
+                        <p>About us</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="log_btn">
+                <a href="/logoutPage"><i class="ri-shut-down-line"></i> Log out</a>
+            </div>
+        </main>
+        <footer>
+            <div class="navigation">
+                <!-- <div class="menu_toggle"><i class="ri-vip-diamond-fill"></i></div> -->
+                <div class="menu">
+                    <a href="/" >
+                        <i class="ri-home-3-line"></i>
+                        <p>Home</p>
+                    </a>
+                    <a href="/">
+                        <i class="ri-list-check-3"></i>
+                        <p>Activity</p>
+                    </a>
+                    <a href="/" class="activated">
+                        <i class="active ri-vip-diamond-fill"></i>
+                        <p>Promotion</p>
+                    </a>
+                    <a href="/walletPage">
+                        <i class="ri-wallet-line"></i>
+                        <p>Wallet</p>
+                    </a>
+                    <a href="/accountPage" class="active">
+                        <i class="ri-account-pin-circle-line"></i>
+                        <p>Account</p>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </section>
+</body>
+</html>

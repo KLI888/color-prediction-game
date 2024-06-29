@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style/wallet.css">
+    <link rel="stylesheet" href="/static/style/utils.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+
+</head>
+<body>
+    <section class="main_section">
+        <header>
+            <div class="navbar">
+                <div class="nav_back">
+                    <a href="/">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                </div>
+                <div class="nav_heading">
+                    <p>Wallet</p>
+                </div>
+                <div>...</div>
+            </div>
+            <div class="wallet_balance">
+                <i class="ri-wallet-fill"></i>
+                <p>₹{{profile.user_balance}}</p>
+                <span>Total balance</span>
+                <div class="amount_type">
+                    <div>
+                        <span>0</span>
+                        <p>Total amount</p>
+                    </div>
+                    <div>
+                        <span>0</span>
+                        <p>Total deposite amount</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="balance_function">
+                <a>
+                    <div class="balance_func_card">
+                        <i class="ri-wallet-3-fill"></i>
+                        <p>Wallet</p>
+                    </div>
+                </a>
+                <a href="/depositePage">
+                    <div class="balance_func_card">
+                        <i class="ri-bank-fill"></i>
+                        <p>Deposit</p>
+                    </div>
+                </a>
+                <a href="/withdrawPage">
+                    <div class="balance_func_card">
+                        <i class="ri-bank-card-fill"></i>
+                        <p>Withdraw</p>
+                    </div>
+                </a>
+                <a>
+                    <div class="balance_func_card">
+                        <i class="ri-vip-crown-fill"></i>
+                        <p>VIP</p>
+                    </div>
+                </a>
+            </div>
+        </main>
+        <footer>
+            <div class="navigation">
+                <!-- <div class="menu_toggle"><i class="ri-vip-diamond-fill"></i></div> -->
+                <div class="menu">
+                    <a href="/" class="">
+                        <i class="ri-home-3-line"></i>
+                        <p>Home</p>
+                    </a>
+                    <a href="/">
+                        <i class="ri-list-check-3"></i>
+                        <p>Activity</p>
+                    </a>
+                    <a href="/" class="activated">
+                        <i class="active ri-vip-diamond-fill"></i>
+                        <p>Promotion</p>
+                    </a>
+                    <a href="/walletPage" class="active">
+                        <i class="ri-wallet-line"></i>
+                        <p>Wallet</p>
+                    </a>
+                    <a href="/accountPage">
+                        <i class="ri-account-pin-circle-line"></i>
+                        <p>Account</p>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </section>
+</body>
+</html>
