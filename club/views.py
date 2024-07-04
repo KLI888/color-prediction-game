@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .tasks import test_func
 
@@ -158,6 +159,7 @@ def walletPage(request):
 
 
 # from .models import GameRound, Bet
+@login_required
 def wingoPage(request):
     profile = Profile.objects.get(user=request.user)
     try:
