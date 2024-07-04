@@ -283,4 +283,9 @@ a {
         display: flex;
         font-size: 9px;
     }
+
+
+    .game_details {
+        width: 175px;
+    }
 }
