@@ -267,3 +267,20 @@ a {
         font-size: 12px;
     }
 }
+
+
+@media (max-width: 310px) {
+    .main_details .details_text {
+        font-size: 8px;
+        text-wrap: wrap;
+        width: 90%;
+    }
+    .main_details .details_btn {
+        color: rgb(232, 230, 227);
+        background-color: #F95959;
+        padding: 6px 10px;
+        border-radius: 20px;
+        display: flex;
+        font-size: 9px;
+    }
+}
