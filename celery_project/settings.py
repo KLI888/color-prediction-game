@@ -12,7 +12,6 @@ SECRET_KEY = 'django-insecure-@g!qteq!x@y2f+i#ifny&aumec(44+gn2t)98(9_jo5y&dki6i
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
-# Add your trusted origin here
 CSRF_TRUSTED_ORIGINS = [
     'https://49club.live',
 ]
@@ -97,7 +96,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
@@ -113,8 +112,4 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json' 
 CELERY_TIMEZONE = 'Asia/Kolkata'
 CELERY_RESULT_BACKEND = 'django-db'
-<<<<<<< HEAD
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
-=======
-CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
->>>>>>> 0ca67ea23c4c89d95d15b67890fd508ea6430391
