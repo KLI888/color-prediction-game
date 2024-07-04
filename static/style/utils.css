@@ -106,21 +106,18 @@ a {
     }
     .ticket_time .time {
         padding: 4px;
-        color: #111;
-        font-size: 14px;
-        font-weight: bold;
-        background-color: #fff;
+        font-size: 12px;
     }
 
     .main_ticket .ticket_left p {
         color: #fff;
-        font-size: 9px;
+        font-size: 8px;
     }
 
     .main_ticket .ticket_left a {
         font-size: 12px;
         padding: 3px 20px;
-        margin-bottom: 25px;
+        margin-bottom: 15px;
     }
 
 
@@ -234,6 +231,27 @@ a {
 }
 
 @media (max-width: 357px) {
+    /* wingo game */
+    .game_window .game_color p {
+        width: 300px;
+        padding: 6px 10px;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+    }
+    .game_window .game_number img {
+        width: 50px;
+        margin: 3px;
+    }
+
+    .game_result th {
+        font-size: 10px;
+        background-color: #F95959;
+        color: #fff;
+    }
+
+
+
     .main_slider img {
         width: 100%;
         height: 140px;
