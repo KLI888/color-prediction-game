@@ -31,10 +31,15 @@ def test(request):
 def home(request):
     return render(request, 'index.html')
 
+
+from django.views.decorators.csrf import csrf_protect
+
+@csrf_protect
 def logoutPage(request):
     logout(request)
     return redirect('loginPage')
 
+@csrf_protect
 def loginPage(request):
     if request.method == 'POST':
         number = request.POST['number']
@@ -47,6 +52,7 @@ def loginPage(request):
             return redirect('home')
     return render(request, 'login.html')
 
+@csrf_protect
 def registerPage(request):
     if request.method == "POST":
         number = request.POST['number']
