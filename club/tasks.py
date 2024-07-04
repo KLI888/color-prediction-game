@@ -157,16 +157,16 @@ def test_func(self):
     violet_amount = roundWinColor.violet_bet_amount
 
     winning_color = ""
-    if green_amount > red_amount and green_amount > violet_amount:
+    if green_amount < red_amount and green_amount < violet_amount:
         # green_amount
         winning_color = "Green"
-    elif red_amount > green_amount and red_amount > violet_amount:
+    elif red_amount < green_amount and red_amount < violet_amount:
         # red_amount
         winning_color = "Red"
     else:
         # violet_amount
         winning_color = "Violet"
-    
+
     roundWinColor.win_color = winning_color
     roundWinColor.save()
     updateBalance(winning_color)

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,23 +81,23 @@ TEMPLATES = [
 ASGI_APPLICATION = 'celery_project.asgi.application'
 
 
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("localhost", 6379)],
-#         },
-#     },
-# }
-
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+            "hosts": [("localhost", 6379)],
         },
     },
 }
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+#         },
+#     },
+# }
 
 
 
@@ -110,10 +112,10 @@ DATABASES = {
 }
 
 
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-#DATABASES['default'] = dj_database_url.config(default='postgres://...'}
-DATABASES['default'].update(db_from_env)
+# import dj_database_url
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# #DATABASES['default'] = dj_database_url.config(default='postgres://...'}
+# DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -156,7 +158,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/your_username/project/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -167,12 +169,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # celery settings
-CELERY_BROKER_URL = os.environ['REDIS_URL'] # for hosting
+# CELERY_BROKER_URL = os.environ['REDIS_URL'] # for hosting
 
-# CELERY_BROKER_URL = 'redis://127.0.0.1:6379' # for localhost
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379' # for localhost
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json' 
+
+
 CELERY_TIMEZONE = 'Asia/Kolkata'
 
 
