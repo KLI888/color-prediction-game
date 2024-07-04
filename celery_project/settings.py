@@ -28,7 +28,9 @@ SECRET_KEY = 'django-insecure-@g!qteq!x@y2f+i#ifny&aumec(44+gn2t)98(9_jo5y&dki6i
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://49club.live',
+]
 
 # Application definition
 
