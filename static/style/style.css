@@ -295,7 +295,7 @@ main {
     background-color: #fff;
     border-radius: 20px;
     width: 400px;
-    height: 500px;
+    height: auto;
     box-shadow: 2px 5px #fff;
 }
 
