@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>49Club</title>
+    <link rel="stylesheet" href="/static/style/settings.css">
+    <link rel="stylesheet" href="/static/style/utils.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
+<body>
+    <section class="main_section">
+        <header>
+            <div class="navbar">
+                <div class="nav_back">
+                    <a href="/">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                </div>
+                <div class="nav_heading">
+                    <p>Settings Center</p>
+                </div>
+                <div style="visibility: hidden;">
+                    <a href="">
+                        <p>settings page</p>
+                    </a>
+                </div>
+            </div>
+            <div class="navbar_card">
+                <div class="avatar">
+                    <img src="/static/assets/avatar.png" alt="">
+                    <a href="">Your avatar <i class="ri-arrow-right-s-line"></i></a>
+                </div>
+                <div class="nickname">
+                    <p>Nickname</p>
+                    <a href="">MemberNNGBZFDJ <i class="ri-arrow-right-s-line"></i></a>
+                </div>
+                <div class="uid">
+                    <p>UID</p>
+                    <a>2565191 <i class="ri-file-copy-line"></i></i></a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="security_information">
+                <div class="security_heading">
+                    <div class="vr_line"></div>
+                    <h1>Security information</h1>
+                </div>
+                <div class="settings_info">
+                    <div>
+                        <i class="ri-lock-2-fill"></i>
+                        <p>Login password</p>
+                    </div>
+                    <div>
+                        <a href="">Edit <i class="ri-arrow-right-s-line"></i></a>
+                    </div>
+                </div>
+                <div class="settings_info">
+                    <div>
+                        <i class="ri-mail-unread-fill"></i>
+                        <p>Bind mailbox</p>
+                    </div>
+                    <div>
+                        <a href="">to bind <i class="ri-arrow-right-s-line"></i></a>
+                    </div>
+                </div>
+                <div class="settings_info">
+                    <div>
+                        <i class="ri-google-fill"></i>
+                        <p>Google verification</p>
+                    </div>
+                    <div>
+                        <a>Unopened <i class="ri-arrow-right-s-line"></i></a>
+                    </div>
+                </div>
+                <div class="settings_info">
+                    <div>
+                        <i class="ri-information-line"></i>
+                        <p>Updated version</p>
+                    </div>
+                    <div>
+                        <a>1.0.9 <i class="ri-arrow-right-s-line"></i></a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+    <script>
+        document.getElementById('dialog_confirm').addEventListener('click', ()=>{
+            document.getElementById("dialog_box").classList.toggle('active')
+        });
+    </script>
+</body>
+</html>

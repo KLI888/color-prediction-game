@@ -1,0 +1,48 @@
+header {
+    background-color: #fff;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+}
+
+.navbar a i {
+    font-size: 30px;
+    color: #111;
+}
+
+.navbar .nav_heading p {
+    font-size: 20px;
+    color: #111;
+}
+
+main {
+    width: 100%;
+    height: auto;
+    background-color: #F7F8FF;
+}
+
+.beginner_guide {
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.guide p {
+    font-size: 18px;
+    color: #111;
+}
+.guide ul {
+    margin-bottom: 20px;
+}
+.guide ul li {
+    font-size: 14px;
+    color: #111;
+}
+
+.guide img {
+    width: 60%;
+
+}

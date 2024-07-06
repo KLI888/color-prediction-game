@@ -227,7 +227,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    {% comment %} <script>
+    <script>
         const gameSocket = new WebSocket(
             'wss://' + window.location.host + '/ws/test/'
         );
@@ -302,9 +302,9 @@
             timeDivs[3].textContent = secondTens;
             timeDivs[4].textContent = secondOnes;
         }
-    </script> {% endcomment %}
+    </script>
 
-    <script>
+    {% comment %} <script>
         let gameSocket;
         let reconnectInterval;
         let countdown;
@@ -407,7 +407,7 @@
         // Initialize WebSocket connection when the script is first loaded
         initializeWebSocket();
     </script>
-    
+     {% endcomment %}
     <script>
         const winSocket = new WebSocket(
             'wss://' + window.location.host + '/ws/game_result/'

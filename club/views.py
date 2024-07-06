@@ -155,6 +155,18 @@ def walletPage(request):
         return redirect('/loginPage')
 
 
+def aboutPage(request):
+    return render(request, "about.html")
+
+
+def settingsPage(request):
+    return render(request, "settings.html")
+
+def guidePage(request):
+    return render(request, "guide.html")
+
+def feedbackPage(request):
+    return render(request, "feedback.html")
 
 
 
