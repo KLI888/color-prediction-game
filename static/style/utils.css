@@ -99,7 +99,7 @@ a {
 }
 
 .dialog_notification {
-    border: 1px solid gray;
+    border: 1px solid #c7c1c1;
 }
 
 .dialog_heading {
@@ -133,7 +133,7 @@ a {
         background-color: #fff;
         border-radius: 20px;
         width: 80vw;
-        height: 75vh;
+        height: auto;
         box-shadow: 2px 5px #fff;
     }
     .dialog_confirm {
