@@ -250,6 +250,12 @@ a {
         color: #fff;
     }
 
+    .balance_btns .deposite_btn {
+        padding: 5px 13px;
+    }
+    .balance_btns .withdraw_btn {
+        padding: 5px 13px;
+    }
 
 
     .main_slider img {
