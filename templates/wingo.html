@@ -74,7 +74,7 @@
                 </div>
                 <div class="wingo_time_card">
                     <img src="/static/assets/clock2.png" alt="">
-                    <p>Win Go 1  minute</p>
+                    <p>Win Go 1   minute</p>
                 </div>
                 <div class="wingo_time_card">
                     <img src="/static/assets/clock2.png" alt="">
@@ -227,7 +227,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    <script>
+    {% comment %} <script>
         const gameSocket = new WebSocket(
             'wss://' + window.location.host + '/ws/test/'
         );
@@ -302,8 +302,112 @@
             timeDivs[3].textContent = secondTens;
             timeDivs[4].textContent = secondOnes;
         }
-    </script>
+    </script> {% endcomment %}
 
+    <script>
+        let gameSocket;
+        let reconnectInterval;
+        let countdown;
+        let game_round_id;
+    
+        function initializeWebSocket() {
+            gameSocket = new WebSocket(
+                'wss://' + window.location.host + '/ws/test/'
+            );
+    
+            gameSocket.onopen = function() {
+                console.log('WebSocket connection established');
+                clearInterval(reconnectInterval);
+            };
+    
+            gameSocket.onmessage = function (e) {
+                const data = JSON.parse(e.data);
+                console.log(data.game_round);
+                if (data.game_round && data.game_round.id) {
+                    game_round_id = data.game_round.game_id; // Update game_round_id
+    
+                    document.getElementById('game_round_id').innerText = data.game_round.game_id;
+                    const timerElement = document.getElementsByClassName('ticket_time')[0];
+    
+                    // Clear the previous countdown interval if it exists
+                    if (countdown) {
+                        clearInterval(countdown);
+                    }
+    
+                    startCountdown(timerElement, 30);
+                } else {
+                    console.error('Invalid game_round data received:', data.game_round);
+                }
+            };
+    
+            gameSocket.onclose = function (e) {
+                console.error('Game socket closed unexpectedly. Attempting to reconnect...');
+                attemptReconnect();
+            };
+    
+            gameSocket.onerror = function (e) {
+                console.error('WebSocket error:', e);
+                gameSocket.close();
+            };
+        }
+    
+        function attemptReconnect() {
+            reconnectInterval = setInterval(() => {
+                console.log('Attempting to reconnect...');
+                if (gameSocket.readyState === WebSocket.CLOSED || gameSocket.readyState === WebSocket.CLOSING) {
+                    initializeWebSocket();
+                }
+            }, 2000);
+        }
+    
+        document.getElementById('buy_btn_total').addEventListener('click', () => {
+            let amount = document.getElementById('total_amount').value;
+            let bet_color = document.getElementById('bet_color').value;
+            if (game_round_id) {
+                console.log('Game round ID:', game_round_id);
+                axios.post('/api/game_bet', { id: game_round_id, amount: amount, bet_color: bet_color })
+                    .then(response => {
+                        console.log('Bet response:', response.data);
+                    })
+                    .catch(error => {
+                        console.error('Error making bet request:', error);
+                    });
+            } else {
+                console.error('No game_round_id available.');
+            }
+        });
+    
+        function startCountdown(timerElement, duration) {
+            let time = duration;
+            updateDisplay(timerElement, time);
+            countdown = setInterval(() => {
+                time--;
+                if (time < 0) {
+                    time = duration;
+                }
+                updateDisplay(timerElement, time);
+            }, 1000);
+        }
+    
+        function updateDisplay(timerElement, time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = time % 60;
+            const minuteTens = Math.floor(minutes / 10);
+            const minuteOnes = minutes % 10;
+            const secondTens = Math.floor(seconds / 10);
+            const secondOnes = seconds % 10;
+    
+            const timeDivs = timerElement.querySelectorAll('.time');
+            timeDivs[0].textContent = minuteTens;
+            timeDivs[1].textContent = minuteOnes;
+            timeDivs[3].textContent = secondTens;
+            timeDivs[4].textContent = secondOnes;
+        }
+    
+        // Initialize WebSocket connection when the script is first loaded
+        initializeWebSocket();
+    </script>
+    
     <script>
         const winSocket = new WebSocket(
             'wss://' + window.location.host + '/ws/game_result/'
