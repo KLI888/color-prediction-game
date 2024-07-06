@@ -98,7 +98,13 @@ a {
     
 }
 
+.dialog_notification {
+    border: 1px solid gray;
+}
 
+.dialog_heading {
+    border-radius: 20px 20px 0 0;
+}
 @media (max-width:397px) {
     .main_ticket .ticket_right p {
         font-size: 14px;
