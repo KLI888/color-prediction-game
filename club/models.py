@@ -90,6 +90,51 @@ class GameRound(models.Model):
     
             
 
+class RoundWinNumber(models.Model):
+    NUMBER_CHOICES = [
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8'),
+        ('9', '9'),
+    ]
+    round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
+    win_number = models.CharField(max_length=10, choices=NUMBER_CHOICES, blank=True, null=True)
+
+    zero_bet_amount = models.IntegerField(default=0)
+    one_bet_amount = models.IntegerField(default=0)
+    two_bet_amount = models.IntegerField(default=0)
+    three_bet_amount = models.IntegerField(default=0)
+    four_bet_amount = models.IntegerField(default=0)
+    five_bet_amount = models.IntegerField(default=0)
+    six_bet_amount = models.IntegerField(default=0)
+    seven_bet_amount = models.IntegerField(default=0)
+    eight_bet_amount = models.IntegerField(default=0)
+    nine_bet_amount = models.IntegerField(default=0)
+
+
+    def __str__(self):
+        return f"Round: {self.round.game_id}"
+    
+
+class RoundWinSize(models.Model):
+    SIZE_CHOICES = [
+        ('Big', 'Big'),
+        ('Small', 'Small'),
+    ]
+    win_size = models.CharField(max_length=10, choices=SIZE_CHOICES, blank=True, null=True)
+    big_bet_amount = models.IntegerField(default=0)
+    small_bet_amount = models.IntegerField(default=0)
+    violet_bet_amount = models.IntegerField(default=0)
+
+    
+    def __str__(self):
+        return f"Round: {self.round.game_id}"
 
 
 class RoundWinColor(models.Model):
@@ -99,6 +144,7 @@ class RoundWinColor(models.Model):
         ('Violet', 'Violet')
     ]
     round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
+
     win_color = models.CharField(max_length=10, choices=COLOR_CHOICES, blank=True, null=True)
     red_bet_amount = models.IntegerField(default=0)
     green_bet_amount = models.IntegerField(default=0)
@@ -107,7 +153,15 @@ class RoundWinColor(models.Model):
     def __str__(self):
         return f"Round: {self.round.game_id}"
     
+class RoundWinAll(models.Model):
+    round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
+    roundWinColor = models.ForeignKey(RoundWinColor, on_delete=models.CASCADE)
+    roundWinSize = models.ForeignKey(RoundWinSize, on_delete=models.CASCADE)
+    roundWinNumber = models.ForeignKey(RoundWinNumber, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"Round Win {round}"
+    
 
 class Bet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
