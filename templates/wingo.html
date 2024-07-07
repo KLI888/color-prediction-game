@@ -249,7 +249,7 @@
                         </div>
                         <div class="buy_btn">
                             <p id="buy_form_cancle">Cancle</p>
-                            <input type="hidden" value="" name="total_amount" id="total_amount">
+                            <input type="hidden" value="1" name="total_amount" id="total_amount">
                             <input type="hidden" name="bet_color" id="bet_color">
                             <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
                         </div>
@@ -257,9 +257,6 @@
                 </form>
             </section>
         </div>
-
-
-
         <div class="buy_form_div_number" id="buy_form_div_number">
             <section id="buy_color_form" class="buy_form_color">
                 <form action="">
@@ -310,6 +307,7 @@
                 </form>
             </section>
         </div>
+        
         <div class="buy_form_div_size" id="buy_form_div_size">
             <section id="buy_color_form" class="buy_form_color">
                 <form action="">
@@ -333,9 +331,9 @@
                         <div class="buy_quantity">
                             <p>Quantity</p>
                             <div>
-                                <span id="dec_quantity" class="active">-</span>
-                                <span id="quantity_value">1</span>
-                                <span id="inc_quantity" class="active">+</span>
+                                <span id="dec_quantity_size" class="active">-</span>
+                                <span id="quantity_value_size">1</span>
+                                <span id="inc_quantity_size" class="active">+</span>
                             </div>
                         </div>
                         <div class="buy_multiply">
@@ -882,85 +880,69 @@
 
     <!-- form amount handeling for size -->
     <script>
-        // calculating the lot price
+        document.addEventListener('DOMContentLoaded', function () {
+            var balance = document.querySelectorAll('.balance_value_size')
+            var multiply = document.querySelectorAll('.multiply_value_size')
+            var quantity = document.getElementById('quantity_value_size')
+            var buy_btn_total_size = document.getElementById('buy_btn_total_size')
 
-        var balance = document.querySelectorAll('.balance_value');
-        var multiply = document.querySelectorAll('.multiply_value');
-        var quantity = document.getElementById('quantity_value');
+            var new_balance = 1;
+            var new_quantity;
 
-        var buy_btn_total = document.getElementById('buy_btn_total_size');
+            balance.forEach(item => {
+                console.log(item)
+                item.addEventListener("click", () => {
+                    balance.forEach(i => i.classList.remove('active'))
+                    item.classList.add('active')
+                    buy_btn_total_size.value = `Total amount ₹${parseInt(item.textContent) * parseInt(quantity.textContent)}`
+                    new_balance = parseInt(item.textContent)
+                    document.getElementById('total_amount_size').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                    // console.log(item.textContent)
 
-        var new_balance = 1;
-        var new_quantity;
-
-        balance.forEach(item => {
-            console.log(item)
-            item.addEventListener("click", () => {
-                balance.forEach(i => i.classList.remove('active'))
-                item.classList.add('active')
-                buy_btn_total.value = `Total amount ₹${parseInt(item.textContent) * parseInt(quantity.textContent)}`
-                new_balance = parseInt(item.textContent)
-                document.getElementById('total_amount').value = parseInt(item.textContent) * parseInt(quantity.textContent)
-                document.getElementById('buy_btn_total_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
-                document.getElementById('buy_btn_total_size').value = parseInt(item.textContent) * parseInt(quantity.textContent)
-                document.getElementById('total_amount_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
-                document.getElementById('total_amount_size').value = parseInt(item.textContent) * parseInt(quantity.textContent)
-                // console.log(item.textContent)
-
+                })
             })
-        })
 
-        console.log(new_balance);
+            console.log(new_balance);
 
-        multiply.forEach(item => {
-            console.log(item)
-            item.addEventListener("click", () => {
-                multiply.forEach(i => i.classList.remove('active'))
-                item.classList.add('active')
-                quantity.textContent = item.textContent
-                // console.log(new_balance)
+            multiply.forEach(item => {
+                console.log(item)
+                item.addEventListener("click", () => {
+                    multiply.forEach(i => i.classList.remove('active'))
+                    item.classList.add('active')
+                    quantity.textContent = item.textContent
+                    // console.log(new_balance)
 
-                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(item.textContent)}`
-                document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(item.textContent)
-                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(item.textContent)
+                    buy_btn_total_size.value = `Total amount ₹${parseInt(new_balance) * parseInt(item.textContent)}`
+                    document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(item.textContent)
+                    // console.log(item.textContent)
+                    new_quantity = parseInt(item.textContent)
+                    console.log(new_balance)
 
-
-                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(item.textContent)
-                // console.log(item.textContent)
-                new_quantity = parseInt(item.textContent)
-                console.log(new_balance)
-
+                })
             })
-        })
 
-        document.getElementById('dec_quantity').addEventListener('click', () => {
-            if (quantity.textContent == 1) {
-                quantity.textContent = 1
-            } else {
-                quantity.textContent = parseInt(quantity.textContent) - 1;
-                new_quantity = parseInt(quantity.textContent)
-                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
+            document.getElementById('dec_quantity_size').addEventListener('click', () => {
+                if (quantity.textContent == 1) {
+                    quantity.textContent = 1
+                } else {
+                    quantity.textContent = parseInt(quantity.textContent) - 1;
+                    new_quantity = parseInt(quantity.textContent)
+                    buy_btn_total_size.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                    document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
+                }
+            })
 
-
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
-            }
-        })
-
-        document.getElementById('inc_quantity').addEventListener('click', () => {
-            if (quantity.textContent == 1000) {
-                quantity.textContent = 1000
-            } else {
-                quantity.textContent = parseInt(quantity.textContent) + 1;
-                new_quantity = parseInt(quantity.textContent)
-                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
-
-            }
-        })
-
+            document.getElementById('inc_quantity_size').addEventListener('click', () => {
+                if (quantity.textContent == 1000) {
+                    quantity.textContent = 1000
+                } else {
+                    quantity.textContent = parseInt(quantity.textContent) + 1;
+                    new_quantity = parseInt(quantity.textContent)
+                    buy_btn_total_size.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                    document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
+                }
+            })
+        });
     </script>
 
 </body>
