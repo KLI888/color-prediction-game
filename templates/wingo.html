@@ -188,7 +188,8 @@
                 <div class="pagination" style="text-align: center; margin-top: 20px;">
                     <span class="step-links">
                         {% if page_obj.has_previous %}
-                        <a href="?page={{ page_obj.previous_page_number }}"><i style="color: #111; font-size: 22px;" class="ri-arrow-left-wide-line"></i></a>
+                        <a href="?page={{ page_obj.previous_page_number }}"><i style="color: #111; font-size: 22px;"
+                                class="ri-arrow-left-wide-line"></i></a>
                         {% endif %}
 
                         <span class="current">
@@ -196,7 +197,8 @@
                         </span>
 
                         {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}"><i style="color: #111; font-size: 22px;" class="ri-arrow-right-wide-line"></i></a>
+                        <a href="?page={{ page_obj.next_page_number }}"><i style="color: #111; font-size: 22px;"
+                                class="ri-arrow-right-wide-line"></i></a>
                         {% endif %}
                     </span>
                 </div>
@@ -357,7 +359,7 @@
         </div>
     </section>
 
-    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
         integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
@@ -664,7 +666,83 @@
     </script>
 
     <!-- form amount handeling for color -->
-    <script>       
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Close and open the form
+            var number_btn = document.getElementsByClassName("game_number_cl");
+            var selected_number = document.getElementById('selected_number');
+
+            for (let i = 0; i < number_btn.length; i++) {
+                number_btn[i].addEventListener('click', function () {
+                    document.getElementById("buy_form_div_number").classList.toggle("active");
+                    var dataValue = this.getAttribute("data-value");
+                    selected_number.textContent = dataValue;
+                    selected_number.value = dataValue;
+                    document.getElementById("selected_number_input").value = dataValue;
+                    document.getElementById('total_amount_number').value = dataValue;
+                });
+            }
+
+            document.getElementById("form_cancle_number").addEventListener("click", function () {
+                document.getElementById("buy_form_div_number").classList.toggle("active");
+            });
+
+            // Calculating the lot price
+            var balance = document.querySelectorAll('.balance_value');
+            var multiply = document.querySelectorAll('.multiply_value');
+            var quantity = document.getElementById('quantity_value');
+            var buy_btn_total = document.getElementById('buy_btn_total');
+
+            var new_balance = 1;
+            var new_quantity;
+
+            balance.forEach(item => {
+                item.addEventListener("click", () => {
+                    balance.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    new_balance = parseInt(item.textContent);
+                    updateTotalAmount();
+                });
+            });
+
+            multiply.forEach(item => {
+                item.addEventListener("click", () => {
+                    multiply.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    quantity.textContent = item.textContent;
+                    updateTotalAmount();
+                });
+            });
+
+            document.getElementById('dec_quantity').addEventListener('click', () => {
+                if (quantity.textContent == 1) {
+                    quantity.textContent = 1;
+                } else {
+                    quantity.textContent = parseInt(quantity.textContent) - 1;
+                    updateTotalAmount();
+                }
+            });
+
+            document.getElementById('inc_quantity').addEventListener('click', () => {
+                if (quantity.textContent == 1000) {
+                    quantity.textContent = 1000;
+                } else {
+                    quantity.textContent = parseInt(quantity.textContent) + 1;
+                    updateTotalAmount();
+                }
+            });
+
+            function updateTotalAmount() {
+                var totalAmount = parseInt(new_balance) * parseInt(quantity.textContent);
+                buy_btn_total.value = `Total amount ₹${totalAmount}`;
+                document.getElementById('total_amount').value = totalAmount;
+                // document.getElementById('total_amount_number').value = totalAmount;
+                // document.getElementById('total_amount_size').value = totalAmount;
+            }
+        });
+
+    </script>
+    <!-- <script>       
         // calculating the lot price
 
         var balance = document.querySelectorAll('.balance_value')
@@ -730,7 +808,7 @@
             }
         })
 
-    </script>
+    </script> -->
 
     <!-- form amount handeling for number -->
     <script>
