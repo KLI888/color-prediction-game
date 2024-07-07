@@ -119,44 +119,34 @@
                     <p class="game_color_cl" id="color_red">Red</p>
                 </div>
                 <div class="game_number">
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="0">
+                    <span class="game_number_cl" data-value="0">
                         <img src="/static/assets/0.png" alt="">
                     </span>
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="1">
+                    <span  class="game_number_cl" data-value="1">
                         <img src="/static/assets/1.png" alt="">
-                    </span>
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="2">
+                    </span >
+                    <span  class="game_number_cl" data-value="2">
                         <img src="/static/assets/2.png" alt="">
                     </span>
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="3">
+                    <span class="game_number_cl"  data-value="3">
                         <img src="/static/assets/3.png" alt="">
                     </span>
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="4">
+                    <span  class="game_number_cl" data-value="4">
                         <img src="/static/assets/4.png" alt="">
                     </span>
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="5">
+                    <span  class="game_number_cl" data-value="5">
                         <img src="/static/assets/5.png" alt="">
                     </span>
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="6">
+                    <span   class="game_number_cl" data-value="6">
                         <img src="/static/assets/6.png" alt="">
                     </span>
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="7">
+                    <span class="game_number_cl"  data-value="7">
                         <img src="/static/assets/7.png" alt="">
                     </span>
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="8">
+                    <span class="game_number_cl"  data-value="8">
                         <img src="/static/assets/8.png" alt="">
                     </span>
-                    <span>
-                        <input class="game_number_cl" type="hidden" name="" value="9">
+                    <span class="game_number_cl"  data-value="9">
                         <img src="/static/assets/9.png" alt="">
                     </span>
                 </div>
@@ -658,10 +648,11 @@
         var color_btn = document.getElementsByClassName("game_color_cl");
         var selected_color = document.getElementById('selected_color')
 
-        for (let i = 0; i < color_btn.length; i++) {
+        for (let i = 0; i < color_btn.length; i++) {-      
             color_btn[i].addEventListener('click', () => {
                 document.getElementById("buy_form_div").classList.toggle("active");
                 selected_color.textContent = color_btn[i].textContent
+                selected_color.textContent = color_btn[i].textContent;
                 selected_color.value = color_btn[i].textContent
             });
         }
@@ -682,8 +673,9 @@
         for (let i = 0; i < color_btn.length; i++) {
             color_btn[i].addEventListener('click', () => {
                 document.getElementById("buy_form_div_number").classList.toggle("active");
-                selected_number.textContent = color_btn[i].textContent
-                selected_number.value = color_btn[i].textContent
+                var dataValue = this.getAttribute("data-value");
+                selected_number.textContent = dataValue
+                selected_number.value = dataValue
             });
         }
 
@@ -696,14 +688,14 @@
     <script>
 
         // close and open the form
-        var color_btn = document.getElementsByClassName("game_size_cl");
+        var size_btn = document.getElementsByClassName("game_size_cl");
         var selected_size = document.getElementById('selected_size')
 
-        for (let i = 0; i < color_btn.length; i++) {
-            color_btn[i].addEventListener('click', () => {
+        for (let i = 0; i < size_btn.length; i++) {
+            size_btn[i].addEventListener('click', () => {
                 document.getElementById("buy_form_div_size").classList.toggle("active");
-                selected_size.textContent = color_btn[i].textContent
-                selected_size.value = color_btn[i].textContent
+                selected_size.textContent = size_btn[i].textContent
+                selected_size.value = size_btn[i].textContent
             });
         }
 
