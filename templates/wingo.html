@@ -666,15 +666,15 @@
     </script>
 
     <!-- form amount handeling for color -->
-    <!-- <script>
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Close and open the form
-            var number_btn = document.getElementsByClassName("game_number_cl");
+            var color_btn = document.getElementsByClassName("game_color_cl");
             var selected_color = document.getElementById('selected_color');
 
-            for (let i = 0; i < number_btn.length; i++) {
-                number_btn[i].addEventListener('click', function () {
-                    document.getElementById("buy_form_div_number").classList.toggle("active");
+            for (let i = 0; i < color_btn.length; i++) {
+                color_btn[i].addEventListener('click', function () {
+                    document.getElementById("buy_form_div").classList.toggle("active");
                     var dataValue = this.getAttribute("data-value");
                     selected_color.textContent = dataValue;
                     selected_color.value = dataValue;
@@ -736,13 +736,11 @@
                 var totalAmount = parseInt(new_balance) * parseInt(quantity.textContent);
                 buy_btn_total.value = `Total amount ₹${totalAmount}`;
                 document.getElementById('total_amount').value = totalAmount;
-                // document.getElementById('total_amount_number').value = totalAmount;
-                // document.getElementById('total_amount_size').value = totalAmount;
             }
         });
 
-    </script> -->
-    <script>       
+    </script>
+    <!-- <script>       
         // calculating the lot price
 
         var balance = document.querySelectorAll('.balance_value')
@@ -808,7 +806,7 @@
             }
         })
 
-    </script>
+    </script> -->
 
     <!-- form amount handeling for number -->
      
