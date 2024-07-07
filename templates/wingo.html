@@ -211,7 +211,8 @@
                     <div class="buy_form">
                         <div class="buy_heading">
                             <h3>Win Go 5Min</h3>
-                            <p>Selected: <span id="selected_color">None</span></p>
+                            <p>Selected: <span id="selected_color"></span></p>
+                            <input type="hidden" name="" value="" id="selected_color_input">
                         </div>
 
 
@@ -653,7 +654,7 @@
                 document.getElementById("buy_form_div").classList.toggle("active");
                 selected_color.textContent = color_btn[i].textContent
                 selected_color.textContent = color_btn[i].textContent;
-                selected_color.value = color_btn[i].textContent
+                document.getElementById('selected_color_input').value = color_btn[i].textContent
             });
         }
 
@@ -665,13 +666,12 @@
 
     <!-- number bet form -->
     <script>
-
         // close and open the form
-        var color_btn = document.getElementsByClassName("game_number_cl");
+        var number_btn = document.getElementsByClassName("game_number_cl");
         var selected_number = document.getElementById('selected_number')
 
-        for (let i = 0; i < color_btn.length; i++) {
-            color_btn[i].addEventListener('click', () => {
+        for (let i = 0; i < number_btn.length; i++) {
+            number_btn[i].addEventListener('click', () => {
                 document.getElementById("buy_form_div_number").classList.toggle("active");
                 var dataValue = this.getAttribute("data-value");
                 selected_number.textContent = dataValue
