@@ -229,7 +229,7 @@
 
     <script>
         const gameSocket = new WebSocket(
-            'wss://' + window.location.host + '/ws/test/'
+            'ws://' + window.location.host + '/ws/test/'
         );
 
         let countdown; // Define the countdown interval variable
@@ -410,7 +410,7 @@
      {% endcomment %}
     <script>
         const winSocket = new WebSocket(
-            'wss://' + window.location.host + '/ws/game_result/'
+            'ws://' + window.location.host + '/ws/game_result/'
         );
         
         winSocket.onmessage = function (e) {

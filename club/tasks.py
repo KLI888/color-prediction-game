@@ -175,8 +175,8 @@ def test_func(self):
     channel_layer = get_channel_layer()
     async_to_sync(channel_layer.group_send)(
         'test_consumer_group', {
-            'type': 'game_round_message',
-            'game_round': roundWinColor_data
+            'type': 'game_round_result',
+            'game_round_winner': roundWinColor_data
         }
     )
 

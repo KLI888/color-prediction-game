@@ -28,3 +28,10 @@ class TestConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'game_round': game_round
         }))
+
+    async def game_round_result(self, event):
+        game_round_winner = event['game_round_winner']
+        await self.send(text_data=json.dumps({
+            'game_round_winner': game_round_winner
+        }))
+
