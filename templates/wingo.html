@@ -203,6 +203,7 @@
             </div>
 
         </main>
+
         <div class="buy_form_div" id="buy_form_div">
             <section id="buy_color_form" class="buy_form_color">
                 <form action="">
@@ -268,10 +269,10 @@
                         <div class="buy_balance">
                             <p>Balance</p>
                             <div>
-                                <span id="balance_value_1" class="balance_value active">1</span>
-                                <span id="balance_value_2" class="balance_value">10</span>
-                                <span id="balance_value_3" class="balance_value">100</span>
-                                <span id="balance_value_4" class="balance_value">1000</span>
+                                <span id="balance_value_1" class="balance_value_number active">1</span>
+                                <span id="balance_value_2" class="balance_value_number">10</span>
+                                <span id="balance_value_3" class="balance_value_number">100</span>
+                                <span id="balance_value_4" class="balance_value_number">1000</span>
                             </div>
                         </div>
                         <div class="buy_quantity">
@@ -283,12 +284,12 @@
                             </div>
                         </div>
                         <div class="buy_multiply">
-                            <span class="multiply_value active">1</span>
-                            <span class="multiply_value">5</span>
-                            <span class="multiply_value">10</span>
-                            <span class="multiply_value">20</span>
-                            <span class="multiply_value">50</span>
-                            <span class="multiply_value">100</span>
+                            <span class="multiply_value_number active">1</span>
+                            <span class="multiply_value_number">5</span>
+                            <span class="multiply_value_number">10</span>
+                            <span class="multiply_value_number">20</span>
+                            <span class="multiply_value_number">50</span>
+                            <span class="multiply_value_number">100</span>
                         </div>
 
                         <div class="buy_policy">
@@ -356,59 +357,7 @@
         </div>
     </section>
 
-    <!-- pagination script start -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script>
-        function loadPage(pageNumber) {
-            $.ajax({
-                url: window.location.pathname,  // Current URL
-                type: 'GET',
-                data: {
-                    page: pageNumber
-                },
-                success: function(data) {
-                    let resultsDiv = $('#results');
-                    resultsDiv.empty();
-                    
-                    data.round_results.forEach(function(result) {
-                        resultsDiv.append(`
-                            <tr>
-                                <td id="round_id">${result.round__game_id}</td>
-                                <td></td>
-                                <td></td>
-                                <td id="win_color">${result.win_color}</td>
-                            </tr>
-                        `);
-                    });
-
-                    let paginationDiv = $('.pagination .step-links');
-                    paginationDiv.empty();
-
-                    if (data.has_previous) {
-                        paginationDiv.append(`
-                            <a href="#" onclick="loadPage(1)">&laquo; first</a>
-                            <a href="#" onclick="loadPage(${data.previous_page_number})">previous</a>
-                        `);
-                    }
-
-                    paginationDiv.append(`
-                        <span class="current">
-                            Page ${data.current_page} of ${data.num_pages}.
-                        </span>
-                    `);
-
-                    if (data.has_next) {
-                        paginationDiv.append(`
-                            <a href="#" onclick="loadPage(${data.next_page_number})">next</a>
-                            <a href="#" onclick="loadPage(${data.num_pages})">last &raquo;</a>
-                        `);
-                    }
-                }
-            });
-        }
-    </script> -->
-    <!-- pagination script end -->
-
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
         integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
@@ -714,6 +663,7 @@
 
     </script>
 
+    <!-- form amount handeling for color -->
     <script>
         // calculating the lot price
 
@@ -721,8 +671,7 @@
         var multiply = document.querySelectorAll('.multiply_value');
         var quantity = document.getElementById('quantity_value');
         var buy_btn_total = document.getElementById('buy_btn_total');
-        var buy_btn_total_number = document.getElementById('buy_btn_total_number');
-        var buy_btn_total_size = document.getElementById('buy_btn_total_size');
+
 
         var new_balance = 1;
         var new_quantity;
@@ -800,6 +749,168 @@
 
                 document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
                 document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
+
+            }
+        })
+
+    </script>
+
+    <!-- form amount handeling for number -->
+    <script>
+        // calculating the lot price
+
+        var balance = document.querySelectorAll('.balance_value_number');
+        var multiply = document.querySelectorAll('.multiply_value_number');
+        var quantity = document.getElementById('quantity_value_number');
+        var buy_btn_total = document.getElementById('buy_btn_total_number');
+
+        var new_balance = 1;
+        var new_quantity;
+
+        balance.forEach(item => {
+            console.log(item)
+            item.addEventListener("click", () => {
+                balance.forEach(i => i.classList.remove('active'))
+                item.classList.add('active')
+                buy_btn_total.value = `Total amount ₹${parseInt(item.textContent) * parseInt(quantity.textContent)}`
+                new_balance = parseInt(item.textContent)
+                document.getElementById('buy_btn_total_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                document.getElementById('total_amount_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                // console.log(item.textContent)
+
+            })
+        })
+
+        console.log(new_balance);
+
+        multiply.forEach(item => {
+            console.log(item)
+            item.addEventListener("click", () => {
+                multiply.forEach(i => i.classList.remove('active'))
+                item.classList.add('active')
+                quantity.textContent = item.textContent
+                // console.log(new_balance)
+
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(item.textContent)}`
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
+
+
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
+                // console.log(item.textContent)
+                new_quantity = parseInt(item.textContent)
+                console.log(new_balance)
+
+            })
+        })
+
+        document.getElementById('dec_quantity').addEventListener('click', () => {
+            if (quantity.textContent == 1) {
+                quantity.textContent = 1
+            } else {
+                quantity.textContent = parseInt(quantity.textContent) - 1;
+                new_quantity = parseInt(quantity.textContent)
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
+
+
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
+            }
+        })
+
+        document.getElementById('inc_quantity').addEventListener('click', () => {
+            if (quantity.textContent == 1000) {
+                quantity.textContent = 1000
+            } else {
+                quantity.textContent = parseInt(quantity.textContent) + 1;
+                new_quantity = parseInt(quantity.textContent)
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
+
+
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
+
+            }
+        })
+
+    </script>
+
+    <!-- form amount handeling for size -->
+    <script>
+        // calculating the lot price
+
+        var balance = document.querySelectorAll('.balance_value');
+        var multiply = document.querySelectorAll('.multiply_value');
+        var quantity = document.getElementById('quantity_value');
+
+        var buy_btn_total = document.getElementById('buy_btn_total_size');
+
+        var new_balance = 1;
+        var new_quantity;
+
+        balance.forEach(item => {
+            console.log(item)
+            item.addEventListener("click", () => {
+                balance.forEach(i => i.classList.remove('active'))
+                item.classList.add('active')
+                buy_btn_total.value = `Total amount ₹${parseInt(item.textContent) * parseInt(quantity.textContent)}`
+                new_balance = parseInt(item.textContent)
+                document.getElementById('total_amount').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                document.getElementById('buy_btn_total_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                document.getElementById('buy_btn_total_size').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                document.getElementById('total_amount_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                document.getElementById('total_amount_size').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                // console.log(item.textContent)
+
+            })
+        })
+
+        console.log(new_balance);
+
+        multiply.forEach(item => {
+            console.log(item)
+            item.addEventListener("click", () => {
+                multiply.forEach(i => i.classList.remove('active'))
+                item.classList.add('active')
+                quantity.textContent = item.textContent
+                // console.log(new_balance)
+
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(item.textContent)}`
+                document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(item.textContent)
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
+                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(item.textContent)
+
+
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
+                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(item.textContent)
+                // console.log(item.textContent)
+                new_quantity = parseInt(item.textContent)
+                console.log(new_balance)
+
+            })
+        })
+
+        document.getElementById('dec_quantity').addEventListener('click', () => {
+            if (quantity.textContent == 1) {
+                quantity.textContent = 1
+            } else {
+                quantity.textContent = parseInt(quantity.textContent) - 1;
+                new_quantity = parseInt(quantity.textContent)
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
+
+
+                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
+            }
+        })
+
+        document.getElementById('inc_quantity').addEventListener('click', () => {
+            if (quantity.textContent == 1000) {
+                quantity.textContent = 1000
+            } else {
+                quantity.textContent = parseInt(quantity.textContent) + 1;
+                new_quantity = parseInt(quantity.textContent)
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
 
             }
         })
