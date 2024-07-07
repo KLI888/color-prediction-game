@@ -603,7 +603,7 @@
     {% comment %}
     <script>
         const winSocket = new WebSocket(
-            'ws://' + window.location.host + '/ws/game_result/'
+            'wss://' + window.location.host + '/ws/game_result/'
         );
 
         winSocket.onmessage = function (e) {
@@ -734,6 +734,8 @@
                 buy_btn_total.value = `Total amount ₹${parseInt(item.textContent) * parseInt(quantity.textContent)}`
                 new_balance = parseInt(item.textContent)
                 document.getElementById('total_amount').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                document.getElementById('total_amount_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                document.getElementById('total_amount_size').value = parseInt(item.textContent) * parseInt(quantity.textContent)
                 // console.log(item.textContent)
 
             })
@@ -751,6 +753,8 @@
 
                 buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(item.textContent)}`
                 document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(item.textContent)
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
+                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(item.textContent)
                 // console.log(item.textContent)
                 new_quantity = parseInt(item.textContent)
                 console.log(new_balance)
@@ -766,6 +770,8 @@
                 new_quantity = parseInt(quantity.textContent)
                 buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
                 document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(new_quantity)
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
+                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
             }
         })
 
@@ -777,6 +783,8 @@
                 new_quantity = parseInt(quantity.textContent)
                 buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
                 document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(new_quantity)
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
+                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
 
             }
         })
