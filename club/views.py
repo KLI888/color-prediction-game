@@ -178,18 +178,6 @@ def wingoPage(request):
     paginator = Paginator(round_results, 10)  # Show 10 round results per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    if request.is_ajax():
-        round_results_list = list(page_obj.object_list.values('id', 'round', 'win_color'))
-        data = {
-            'round_results': round_results_list,
-            'has_previous': page_obj.has_previous(),
-            'has_next': page_obj.has_next(),
-            'previous_page_number': page_obj.previous_page_number() if page_obj.has_previous() else None,
-            'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None,
-            'num_pages': paginator.num_pages,
-            'current_page': page_obj.number,
-        }
-        return JsonResponse(data)
 
     # try:
     #     # latest_round = GameRound.objects.latest('created_at')
