@@ -664,14 +664,13 @@
     </script>
 
     <!-- form amount handeling for color -->
-    <script>
+    <script>       
         // calculating the lot price
 
-        var balance = document.querySelectorAll('.balance_value');
-        var multiply = document.querySelectorAll('.multiply_value');
-        var quantity = document.getElementById('quantity_value');
-        var buy_btn_total = document.getElementById('buy_btn_total');
-
+        var balance = document.querySelectorAll('.balance_value')
+        var multiply = document.querySelectorAll('.multiply_value')
+        var quantity = document.getElementById('quantity_value')
+        var buy_btn_total = document.getElementById('buy_btn_total')
 
         var new_balance = 1;
         var new_quantity;
@@ -681,20 +680,16 @@
             item.addEventListener("click", () => {
                 balance.forEach(i => i.classList.remove('active'))
                 item.classList.add('active')
-                buy_btn_total.value = `Total amount ₹${parseInt(item.textContent) * parseInt(quantity.textContent)}`
+                buy_btn_total.value = `Total amount ₹${parseInt(item.textContent)*parseInt(quantity.textContent)}`
                 new_balance = parseInt(item.textContent)
-                document.getElementById('total_amount').value = parseInt(item.textContent) * parseInt(quantity.textContent)
-                document.getElementById('buy_btn_total_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
-                document.getElementById('buy_btn_total_size').value = parseInt(item.textContent) * parseInt(quantity.textContent)
-                document.getElementById('total_amount_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
-                document.getElementById('total_amount_size').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                document.getElementById('total_amount').value = parseInt(item.textContent)*parseInt(quantity.textContent)
                 // console.log(item.textContent)
-
+                
             })
         })
 
         console.log(new_balance);
-
+        
         multiply.forEach(item => {
             console.log(item)
             item.addEventListener("click", () => {
@@ -703,52 +698,34 @@
                 quantity.textContent = item.textContent
                 // console.log(new_balance)
 
-                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(item.textContent)}`
-                document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(item.textContent)
-                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(item.textContent)
-
-
-                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(item.textContent)
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance)*parseInt(item.textContent)}`
+                document.getElementById('total_amount').value = parseInt(new_balance)*parseInt(item.textContent)
                 // console.log(item.textContent)
                 new_quantity = parseInt(item.textContent)
                 console.log(new_balance)
 
             })
         })
-
-        document.getElementById('dec_quantity').addEventListener('click', () => {
-            if (quantity.textContent == 1) {
+        
+        document.getElementById('dec_quantity').addEventListener('click', ()=> {
+            if(quantity.textContent == 1){
                 quantity.textContent = 1
             } else {
-                quantity.textContent = parseInt(quantity.textContent) - 1;
+                quantity.textContent = parseInt(quantity.textContent)-1;
                 new_quantity = parseInt(quantity.textContent)
-                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
-                document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(new_quantity)
-                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
-
-
-                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance)*parseInt(new_quantity)}`
+                document.getElementById('total_amount').value = parseInt(new_balance)*parseInt(new_quantity)
             }
         })
 
-        document.getElementById('inc_quantity').addEventListener('click', () => {
-            if (quantity.textContent == 1000) {
+        document.getElementById('inc_quantity').addEventListener('click', ()=> {
+            if(quantity.textContent == 1000){
                 quantity.textContent = 1000
             } else {
-                quantity.textContent = parseInt(quantity.textContent) + 1;
+                quantity.textContent = parseInt(quantity.textContent)+1;
                 new_quantity = parseInt(quantity.textContent)
-                buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
-                document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(new_quantity)
-                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
-                document.getElementById('total_amount_size').value = parseInt(new_balance) * parseInt(new_quantity)
-
-
-                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
-                document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance)*parseInt(new_quantity)}`
+                document.getElementById('total_amount').value = parseInt(new_balance)*parseInt(new_quantity)
 
             }
         })
