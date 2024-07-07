@@ -301,7 +301,7 @@
                         <div class="buy_btn">
                             <p id="form_cancle_number">Cancle</p>
                             <input type="hidden" name="total_amount_number" value="1" id="total_amount_number">
-                            <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
+                            <input id="buy_btn_total_number" type="submit" value="Total amount ₹1.00">
                         </div>
                     </div>
                 </form>
@@ -351,7 +351,7 @@
                         <div class="buy_btn">
                             <p id="form_cancle_size">Cancle</p>
                             <input type="hidden" name="total_amount_size" value="1" id="total_amount_size">
-                            <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
+                            <input id="buy_btn_total_size" type="submit" value="Total amount ₹1.00">
                         </div>
                     </div>
                 </form>
@@ -666,71 +666,75 @@
     </script>
 
     <!-- form amount handeling for color -->
-    <script>       
+    <script>
         // calculating the lot price
 
-        var balance = document.querySelectorAll('.balance_value')
-        var multiply = document.querySelectorAll('.multiply_value')
-        var quantity = document.getElementById('quantity_value')
-        var buy_btn_total = document.getElementById('buy_btn_total')
 
-        var new_balance = 1;
-        var new_quantity;
+        document.addEventListener('DOMContentLoaded', function () {
+            var balance = document.querySelectorAll('.balance_value')
+            var multiply = document.querySelectorAll('.multiply_value')
+            var quantity = document.getElementById('quantity_value')
+            var buy_btn_total = document.getElementById('buy_btn_total')
 
-        balance.forEach(item => {
-            console.log(item)
-            item.addEventListener("click", () => {
-                balance.forEach(i => i.classList.remove('active'))
-                item.classList.add('active')
-                buy_btn_total.value = `Total amount ₹${parseInt(item.textContent)*parseInt(quantity.textContent)}`
-                new_balance = parseInt(item.textContent)
-                document.getElementById('total_amount').value = parseInt(item.textContent)*parseInt(quantity.textContent)
-                // console.log(item.textContent)
-                
+            var new_balance = 1;
+            var new_quantity;
+
+            balance.forEach(item => {
+                console.log(item)
+                item.addEventListener("click", () => {
+                    balance.forEach(i => i.classList.remove('active'))
+                    item.classList.add('active')
+                    buy_btn_total.value = `Total amount ₹${parseInt(item.textContent) * parseInt(quantity.textContent)}`
+                    new_balance = parseInt(item.textContent)
+                    document.getElementById('total_amount').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                    // console.log(item.textContent)
+
+                })
             })
-        })
 
-        console.log(new_balance);
-        
-        multiply.forEach(item => {
-            console.log(item)
-            item.addEventListener("click", () => {
-                multiply.forEach(i => i.classList.remove('active'))
-                item.classList.add('active')
-                quantity.textContent = item.textContent
-                // console.log(new_balance)
+            console.log(new_balance);
 
-                buy_btn_total.value = `Total amount ₹${parseInt(new_balance)*parseInt(item.textContent)}`
-                document.getElementById('total_amount').value = parseInt(new_balance)*parseInt(item.textContent)
-                // console.log(item.textContent)
-                new_quantity = parseInt(item.textContent)
-                console.log(new_balance)
+            multiply.forEach(item => {
+                console.log(item)
+                item.addEventListener("click", () => {
+                    multiply.forEach(i => i.classList.remove('active'))
+                    item.classList.add('active')
+                    quantity.textContent = item.textContent
+                    // console.log(new_balance)
 
+                    buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(item.textContent)}`
+                    document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(item.textContent)
+                    // console.log(item.textContent)
+                    new_quantity = parseInt(item.textContent)
+                    console.log(new_balance)
+
+                })
             })
-        })
-        
-        document.getElementById('dec_quantity').addEventListener('click', ()=> {
-            if(quantity.textContent == 1){
-                quantity.textContent = 1
-            } else {
-                quantity.textContent = parseInt(quantity.textContent)-1;
-                new_quantity = parseInt(quantity.textContent)
-                buy_btn_total.value = `Total amount ₹${parseInt(new_balance)*parseInt(new_quantity)}`
-                document.getElementById('total_amount').value = parseInt(new_balance)*parseInt(new_quantity)
-            }
-        })
 
-        document.getElementById('inc_quantity').addEventListener('click', ()=> {
-            if(quantity.textContent == 1000){
-                quantity.textContent = 1000
-            } else {
-                quantity.textContent = parseInt(quantity.textContent)+1;
-                new_quantity = parseInt(quantity.textContent)
-                buy_btn_total.value = `Total amount ₹${parseInt(new_balance)*parseInt(new_quantity)}`
-                document.getElementById('total_amount').value = parseInt(new_balance)*parseInt(new_quantity)
+            document.getElementById('dec_quantity').addEventListener('click', () => {
+                if (quantity.textContent == 1) {
+                    quantity.textContent = 1
+                } else {
+                    quantity.textContent = parseInt(quantity.textContent) - 1;
+                    new_quantity = parseInt(quantity.textContent)
+                    buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                    document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(new_quantity)
+                }
+            })
 
-            }
-        })
+            document.getElementById('inc_quantity').addEventListener('click', () => {
+                if (quantity.textContent == 1000) {
+                    quantity.textContent = 1000
+                } else {
+                    quantity.textContent = parseInt(quantity.textContent) + 1;
+                    new_quantity = parseInt(quantity.textContent)
+                    buy_btn_total.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                    document.getElementById('total_amount').value = parseInt(new_balance) * parseInt(new_quantity)
+
+                }
+            })
+
+        });
 
     </script>
 
@@ -803,13 +807,13 @@
     </script> -->
 
     <!-- form amount handeling for number -->
-     
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Close and open the form
             var number_btn = document.getElementsByClassName("game_number_cl");
             var selected_number = document.getElementById('selected_number');
-    
+
             for (let i = 0; i < number_btn.length; i++) {
                 number_btn[i].addEventListener('click', function () {
                     document.getElementById("buy_form_div_number").classList.toggle("active");
@@ -820,20 +824,20 @@
                     document.getElementById('total_amount_number').value = dataValue;
                 });
             }
-    
+
             document.getElementById("form_cancle_number").addEventListener("click", function () {
                 document.getElementById("buy_form_div_number").classList.toggle("active");
             });
-    
+
             // Calculating the lot price
             var balance_number = document.querySelectorAll('.balance_value_number');
             var multiply_number = document.querySelectorAll('.multiply_value_number');
             var quantity = document.getElementById('quantity_value_number');
             var buy_btn_total_number = document.getElementById('buy_btn_total_number');
-    
+
             var new_balance = 1;
             var new_quantity;
-    
+
             balance_number.forEach(item => {
                 item.addEventListener("click", () => {
                     balance_number.forEach(i => i.classList.remove('active'));
@@ -842,7 +846,7 @@
                     updateTotalAmount();
                 });
             });
-    
+
             multiply_number.forEach(item => {
                 item.addEventListener("click", () => {
                     multiply_number.forEach(i => i.classList.remove('active'));
@@ -851,7 +855,7 @@
                     updateTotalAmount();
                 });
             });
-    
+
             document.getElementById('dec_quantity_number').addEventListener('click', () => {
                 if (quantity.textContent == 1) {
                     quantity.textContent = 1;
@@ -860,7 +864,7 @@
                     updateTotalAmount();
                 }
             });
-    
+
             document.getElementById('inc_quantity_number').addEventListener('click', () => {
                 if (quantity.textContent == 1000) {
                     quantity.textContent = 1000;
@@ -869,7 +873,7 @@
                     updateTotalAmount();
                 }
             });
-    
+
             function updateTotalAmount() {
                 var totalAmount = parseInt(new_balance) * parseInt(quantity.textContent);
                 buy_btn_total_number.value = `Total amount ₹${totalAmount}`;
@@ -877,7 +881,7 @@
             }
         });
     </script>
-    
+
 
     <!-- form amount handeling for size -->
     <script>
