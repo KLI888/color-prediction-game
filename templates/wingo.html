@@ -269,7 +269,7 @@
                     <div class="buy_form">
                         <div class="buy_heading">
                             <h3>Win Go 30Seconds</h3>
-                            <p>Selected: <span id="selected_color">None</span></p>
+                            <p>Selected: <span id="selected_number">None</span></p>
                         </div>
 
 
@@ -317,7 +317,7 @@
                     <div class="buy_form">
                         <div class="buy_heading">
                             <h3>Win Go 30Seconds</h3>
-                            <p>Selected: <span id="selected_color">None</span></p>
+                            <p>Selected: <span id="selected_size">None</span></p>
                         </div>
 
 
@@ -677,18 +677,18 @@
 
         // close and open the form
         var color_btn = document.getElementsByClassName("game_number_cl");
-        var selected_color = document.getElementById('selected_color')
+        var selected_number = document.getElementById('selected_number')
 
         for (let i = 0; i < color_btn.length; i++) {
             color_btn[i].addEventListener('click', () => {
-                document.getElementById("buy_form_div_size").classList.toggle("active");
-                selected_color.textContent = color_btn[i].textContent
-                selected_color.value = color_btn[i].textContent
+                document.getElementById("buy_form_div_number").classList.toggle("active");
+                selected_number.textContent = color_btn[i].textContent
+                selected_number.value = color_btn[i].textContent
             });
         }
 
         document.getElementById("form_cancle_number").addEventListener("click", () => {
-            document.getElementById("buy_form_div_size").classList.toggle("active");
+            document.getElementById("buy_form_div_number").classList.toggle("active");
         })
 
     </script>
@@ -697,18 +697,18 @@
 
         // close and open the form
         var color_btn = document.getElementsByClassName("game_size_cl");
-        var selected_color = document.getElementById('selected_color')
+        var selected_size = document.getElementById('selected_size')
 
         for (let i = 0; i < color_btn.length; i++) {
             color_btn[i].addEventListener('click', () => {
-                document.getElementById("buy_form_div_number").classList.toggle("active");
-                selected_color.textContent = color_btn[i].textContent
-                selected_color.value = color_btn[i].textContent
+                document.getElementById("buy_form_div_size").classList.toggle("active");
+                selected_size.textContent = color_btn[i].textContent
+                selected_size.value = color_btn[i].textContent
             });
         }
 
         document.getElementById("form_cancle_size").addEventListener("click", () => {
-            document.getElementById("buy_form_div_number").classList.toggle("active");
+            document.getElementById("buy_form_div_size").classList.toggle("active");
         })
 
     </script>
