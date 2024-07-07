@@ -677,7 +677,7 @@
         var selected_number = document.getElementById('selected_number')
 
         for (let i = 0; i < number_btn.length; i++) {
-            number_btn[i].addEventListener('click', () => {
+            number_btn[i].addEventListener('click', function() {
                 document.getElementById("buy_form_div_number").classList.toggle("active");
                 var dataValue = this.getAttribute("data-value");
                 selected_number.textContent = dataValue
@@ -700,7 +700,7 @@
         var selected_size = document.getElementById('selected_size')
 
         for (let i = 0; i < size_btn.length; i++) {
-            size_btn[i].addEventListener('click', () => {
+            size_btn[i].addEventListener('click', function() {
                 document.getElementById("buy_form_div_size").classList.toggle("active");
                 selected_size.textContent = size_btn[i].textContent
                 selected_size.value = size_btn[i].textContent
