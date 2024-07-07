@@ -280,9 +280,9 @@
                         <div class="buy_quantity">
                             <p>Quantity</p>
                             <div>
-                                <span id="dec_quantity" class="active">-</span>
+                                <span id="dec_quantity_number" class="active">-</span>
                                 <span id="quantity_value">1</span>
-                                <span id="inc_quantity" class="active">+</span>
+                                <span id="inc_quantity_number" class="active">+</span>
                             </div>
                         </div>
                         <div class="buy_multiply">
@@ -300,7 +300,7 @@
                         </div>
                         <div class="buy_btn">
                             <p id="form_cancle_number">Cancle</p>
-                            <input type="hidden" name="" value="" id="total_amount_number">
+                            <input type="hidden" name="total_amount_number" value="1" id="total_amount_number">
                             <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
                         </div>
                     </div>
@@ -321,10 +321,10 @@
                         <div class="buy_balance">
                             <p>Balance</p>
                             <div>
-                                <span id="balance_value_1" class="balance_value active">1</span>
-                                <span id="balance_value_2" class="balance_value">10</span>
-                                <span id="balance_value_3" class="balance_value">100</span>
-                                <span id="balance_value_4" class="balance_value">1000</span>
+                                <span id="balance_value_1" class="balance_value_size active">1</span>
+                                <span id="balance_value_2" class="balance_value_size">10</span>
+                                <span id="balance_value_3" class="balance_value_size">100</span>
+                                <span id="balance_value_4" class="balance_value_size">1000</span>
                             </div>
                         </div>
                         <div class="buy_quantity">
@@ -336,12 +336,12 @@
                             </div>
                         </div>
                         <div class="buy_multiply">
-                            <span class="multiply_value active">1</span>
-                            <span class="multiply_value">5</span>
-                            <span class="multiply_value">10</span>
-                            <span class="multiply_value">20</span>
-                            <span class="multiply_value">50</span>
-                            <span class="multiply_value">100</span>
+                            <span class="multiply_value_size active">1</span>
+                            <span class="multiply_value_size">5</span>
+                            <span class="multiply_value_size">10</span>
+                            <span class="multiply_value_size">20</span>
+                            <span class="multiply_value_size">50</span>
+                            <span class="multiply_value_size">100</span>
                         </div>
 
                         <div class="buy_policy">
@@ -350,7 +350,7 @@
                         </div>
                         <div class="buy_btn">
                             <p id="form_cancle_size">Cancle</p>
-                            <input type="hidden" name="" value="" id="total_amount_size">
+                            <input type="hidden" name="total_amount_size" value="1" id="total_amount_size">
                             <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
                         </div>
                     </div>
@@ -666,19 +666,19 @@
     </script>
 
     <!-- form amount handeling for color -->
-    <script>
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Close and open the form
             var number_btn = document.getElementsByClassName("game_number_cl");
-            var selected_number = document.getElementById('selected_number');
+            var selected_color = document.getElementById('selected_color');
 
             for (let i = 0; i < number_btn.length; i++) {
                 number_btn[i].addEventListener('click', function () {
                     document.getElementById("buy_form_div_number").classList.toggle("active");
                     var dataValue = this.getAttribute("data-value");
-                    selected_number.textContent = dataValue;
-                    selected_number.value = dataValue;
-                    document.getElementById("selected_number_input").value = dataValue;
+                    selected_color.textContent = dataValue;
+                    selected_color.value = dataValue;
+                    document.getElementById("selected_color_input").value = dataValue;
                     document.getElementById('total_amount_number').value = dataValue;
                 });
             }
@@ -741,8 +741,8 @@
             }
         });
 
-    </script>
-    <!-- <script>       
+    </script> -->
+    <script>       
         // calculating the lot price
 
         var balance = document.querySelectorAll('.balance_value')
@@ -808,7 +808,7 @@
             }
         })
 
-    </script> -->
+    </script>
 
     <!-- form amount handeling for number -->
      
@@ -834,26 +834,26 @@
             });
     
             // Calculating the lot price
-            var balance = document.querySelectorAll('.balance_value_number');
-            var multiply = document.querySelectorAll('.multiply_value_number');
+            var balance_number = document.querySelectorAll('.balance_value_number');
+            var multiply_number = document.querySelectorAll('.multiply_value_number');
             var quantity = document.getElementById('quantity_value_number');
             var buy_btn_total_number = document.getElementById('buy_btn_total_number');
     
             var new_balance = 1;
             var new_quantity;
     
-            balance.forEach(item => {
+            balance_number.forEach(item => {
                 item.addEventListener("click", () => {
-                    balance.forEach(i => i.classList.remove('active'));
+                    balance_number.forEach(i => i.classList.remove('active'));
                     item.classList.add('active');
                     new_balance = parseInt(item.textContent);
                     updateTotalAmount();
                 });
             });
     
-            multiply.forEach(item => {
+            multiply_number.forEach(item => {
                 item.addEventListener("click", () => {
-                    multiply.forEach(i => i.classList.remove('active'));
+                    multiply_number.forEach(i => i.classList.remove('active'));
                     item.classList.add('active');
                     quantity.textContent = item.textContent;
                     updateTotalAmount();
