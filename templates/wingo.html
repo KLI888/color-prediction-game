@@ -546,7 +546,7 @@
             color_btn[i].addEventListener('click', () => {
                 document.getElementById("buy_color_form").classList.toggle("active");
                 selected_color.textContent = color_btn[i].textContent
-                document.getElementById('bet_color').value = color_btn[i].textContent
+                selected_color.value = color_btn[i].textContent
             });
         }
 
