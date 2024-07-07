@@ -666,80 +666,74 @@
     </script>
 
     <!-- form amount handeling for color -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Close and open the form
-            var color_btn = document.getElementsByClassName("game_color_cl");
-            var selected_color = document.getElementById('selected_color');
+    <script>       
+        // calculating the lot price
 
-            for (let i = 0; i < color_btn.length; i++) {
-                color_btn[i].addEventListener('click', function () {
-                    document.getElementById("buy_form_div").classList.toggle("active");
-                    var dataValue = this.getAttribute("data-value");
-                    selected_color.textContent = dataValue;
-                    selected_color.value = dataValue;
-                    document.getElementById("selected_color_input").value = dataValue;
-                    document.getElementById('total_amount_number').value = dataValue;
-                });
+        var balance = document.querySelectorAll('.balance_value')
+        var multiply = document.querySelectorAll('.multiply_value')
+        var quantity = document.getElementById('quantity_value')
+        var buy_btn_total = document.getElementById('buy_btn_total')
+
+        var new_balance = 1;
+        var new_quantity;
+
+        balance.forEach(item => {
+            console.log(item)
+            item.addEventListener("click", () => {
+                balance.forEach(i => i.classList.remove('active'))
+                item.classList.add('active')
+                buy_btn_total.value = `Total amount ₹${parseInt(item.textContent)*parseInt(quantity.textContent)}`
+                new_balance = parseInt(item.textContent)
+                document.getElementById('total_amount').value = parseInt(item.textContent)*parseInt(quantity.textContent)
+                // console.log(item.textContent)
+                
+            })
+        })
+
+        console.log(new_balance);
+        
+        multiply.forEach(item => {
+            console.log(item)
+            item.addEventListener("click", () => {
+                multiply.forEach(i => i.classList.remove('active'))
+                item.classList.add('active')
+                quantity.textContent = item.textContent
+                // console.log(new_balance)
+
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance)*parseInt(item.textContent)}`
+                document.getElementById('total_amount').value = parseInt(new_balance)*parseInt(item.textContent)
+                // console.log(item.textContent)
+                new_quantity = parseInt(item.textContent)
+                console.log(new_balance)
+
+            })
+        })
+        
+        document.getElementById('dec_quantity').addEventListener('click', ()=> {
+            if(quantity.textContent == 1){
+                quantity.textContent = 1
+            } else {
+                quantity.textContent = parseInt(quantity.textContent)-1;
+                new_quantity = parseInt(quantity.textContent)
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance)*parseInt(new_quantity)}`
+                document.getElementById('total_amount').value = parseInt(new_balance)*parseInt(new_quantity)
             }
+        })
 
-            document.getElementById("form_cancle_number").addEventListener("click", function () {
-                document.getElementById("buy_form_div_number").classList.toggle("active");
-            });
+        document.getElementById('inc_quantity').addEventListener('click', ()=> {
+            if(quantity.textContent == 1000){
+                quantity.textContent = 1000
+            } else {
+                quantity.textContent = parseInt(quantity.textContent)+1;
+                new_quantity = parseInt(quantity.textContent)
+                buy_btn_total.value = `Total amount ₹${parseInt(new_balance)*parseInt(new_quantity)}`
+                document.getElementById('total_amount').value = parseInt(new_balance)*parseInt(new_quantity)
 
-            // Calculating the lot price
-            var balance = document.querySelectorAll('.balance_value');
-            var multiply = document.querySelectorAll('.multiply_value');
-            var quantity = document.getElementById('quantity_value');
-            var buy_btn_total = document.getElementById('buy_btn_total');
-
-            var new_balance = 1;
-            var new_quantity;
-
-            balance.forEach(item => {
-                item.addEventListener("click", () => {
-                    balance.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    new_balance = parseInt(item.textContent);
-                    updateTotalAmount();
-                });
-            });
-
-            multiply.forEach(item => {
-                item.addEventListener("click", () => {
-                    multiply.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    quantity.textContent = item.textContent;
-                    updateTotalAmount();
-                });
-            });
-
-            document.getElementById('dec_quantity').addEventListener('click', () => {
-                if (quantity.textContent == 1) {
-                    quantity.textContent = 1;
-                } else {
-                    quantity.textContent = parseInt(quantity.textContent) - 1;
-                    updateTotalAmount();
-                }
-            });
-
-            document.getElementById('inc_quantity').addEventListener('click', () => {
-                if (quantity.textContent == 1000) {
-                    quantity.textContent = 1000;
-                } else {
-                    quantity.textContent = parseInt(quantity.textContent) + 1;
-                    updateTotalAmount();
-                }
-            });
-
-            function updateTotalAmount() {
-                var totalAmount = parseInt(new_balance) * parseInt(quantity.textContent);
-                buy_btn_total.value = `Total amount ₹${totalAmount}`;
-                document.getElementById('total_amount').value = totalAmount;
             }
-        });
+        })
 
     </script>
+
     <!-- <script>       
         // calculating the lot price
 
