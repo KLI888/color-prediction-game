@@ -12,18 +12,25 @@
         .game_result {
             padding: 10px 15px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin: auto;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             /* border: 1px solid black; */
         }
-        th, td {
+
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
+
         th {
             background-color: #F95959;
             color: #fff;
@@ -43,7 +50,7 @@
                 </div>
                 <div class="nav_icon">
                     <div class="mail">
-                        <a ><i class="ri-customer-service-2-line"></i></a>
+                        <a><i class="ri-customer-service-2-line"></i></a>
                     </div>
                     <div class="down">
                         <i class="ri-download-cloud-fill"></i>
@@ -112,40 +119,50 @@
                     <p class="game_color_cl" id="color_red">Red</p>
                 </div>
                 <div class="game_number">
-                    <a href="">
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="0">
                         <img src="/static/assets/0.png" alt="">
-                    </a>
-                    <a href="">
+                    </span>
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="1">
                         <img src="/static/assets/1.png" alt="">
-                    </a>
-                    <a href="">
+                    </span>
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="2">
                         <img src="/static/assets/2.png" alt="">
-                    </a>
-                    <a href="">
+                    </span>
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="3">
                         <img src="/static/assets/3.png" alt="">
-                    </a>
-                    <a href="">
+                    </span>
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="4">
                         <img src="/static/assets/4.png" alt="">
-                    </a>
-                    <a href="">
+                    </span>
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="5">
                         <img src="/static/assets/5.png" alt="">
-                    </a>
-                    <a href="">
+                    </span>
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="6">
                         <img src="/static/assets/6.png" alt="">
-                    </a>
-                    <a href="">
+                    </span>
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="7">
                         <img src="/static/assets/7.png" alt="">
-                    </a>
-                    <a href="">
+                    </span>
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="8">
                         <img src="/static/assets/8.png" alt="">
-                    </a>
-                    <a href="">
+                    </span>
+                    <span class="game_number_cl">
+                        <input type="hidden" name="" value="9">
                         <img src="/static/assets/9.png" alt="">
-                    </a>
+                    </span>
                 </div>
                 <div class="game_size">
-                    <div class="size_big">Big</div>
-                    <div class="size_small">Small</div>
+                    <div class="game_size_cl size_big">Big</div>
+                    <div class="game_size_cl size_small">Small</div>
                 </div>
             </div>
             <div class="game_result">
@@ -167,38 +184,134 @@
                         </tr>
                         <!-- Add more rows as needed -->
                         {% for result in page_obj %}
-                            <tr>
-                                <td id="round_id">{{ result.round.game_id }}</td>
-                                <td></td>
-                                <td></td>
-                                <td id="win_color"> {{ result.win_color }}</td>
-                            </tr>
+                        <tr>
+                            <td id="round_id">{{ result.round.game_id }}</td>
+                            <td></td>
+                            <td></td>
+                            <td id="win_color"> {{ result.win_color }}</td>
+                        </tr>
                         {% endfor %}
 
                     </tbody>
-                    
+
                 </table>
                 <div class="pagination">
                     <span class="step-links">
                         {% if page_obj.has_previous %}
-                            <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
                         {% endif %}
-                        
+
                         <span class="current">
                             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                         </span>
-                        
+
                         {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}">next</a>
-                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
                         {% endif %}
                     </span>
                 </div>
             </div>
-            
+
         </main>
         <div class="buy_form_div" id="buy_form_div">
+            <section id="buy_color_form" class="buy_form_color">
+                <form action="">
+                    <div class="buy_form">
+                        <div class="buy_heading">
+                            <h3>Win Go 5Min</h3>
+                            <p>Selected: <span id="selected_color">None</span></p>
+                        </div>
+
+
+                        <div class="buy_balance">
+                            <p>Balance</p>
+                            <div>
+                                <span id="balance_value_1" class="balance_value active">1</span>
+                                <span id="balance_value_2" class="balance_value">10</span>
+                                <span id="balance_value_3" class="balance_value">100</span>
+                                <span id="balance_value_4" class="balance_value">1000</span>
+                            </div>
+                        </div>
+                        <div class="buy_quantity">
+                            <p>Quantity</p>
+                            <div>
+                                <span id="dec_quantity" class="active">-</span>
+                                <span id="quantity_value">1</span>
+                                <span id="inc_quantity" class="active">+</span>
+                            </div>
+                        </div>
+                        <div class="buy_multiply">
+                            <span class="multiply_value active">1</span>
+                            <span class="multiply_value">5</span>
+                            <span class="multiply_value">10</span>
+                            <span class="multiply_value">20</span>
+                            <span class="multiply_value">50</span>
+                            <span class="multiply_value">100</span>
+                        </div>
+
+                        <div class="buy_policy">
+                            <input type="radio">
+                            <p>I agree</p><span>|Pre-sale rules|</span>
+                        </div>
+                        <div class="buy_btn">
+                            <p id="buy_form_cancle">Cancle</p>
+                            <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div class="buy_form_div_number" id="buy_form_div_number">
+            <section id="buy_color_form" class="buy_form_color">
+                <form action="">
+                    <div class="buy_form">
+                        <div class="buy_heading">
+                            <h3>Win Go 30Seconds</h3>
+                            <p>Selected: <span id="selected_color">None</span></p>
+                        </div>
+
+
+                        <div class="buy_balance">
+                            <p>Balance</p>
+                            <div>
+                                <span id="balance_value_1" class="balance_value active">1</span>
+                                <span id="balance_value_2" class="balance_value">10</span>
+                                <span id="balance_value_3" class="balance_value">100</span>
+                                <span id="balance_value_4" class="balance_value">1000</span>
+                            </div>
+                        </div>
+                        <div class="buy_quantity">
+                            <p>Quantity</p>
+                            <div>
+                                <span id="dec_quantity" class="active">-</span>
+                                <span id="quantity_value">1</span>
+                                <span id="inc_quantity" class="active">+</span>
+                            </div>
+                        </div>
+                        <div class="buy_multiply">
+                            <span class="multiply_value active">1</span>
+                            <span class="multiply_value">5</span>
+                            <span class="multiply_value">10</span>
+                            <span class="multiply_value">20</span>
+                            <span class="multiply_value">50</span>
+                            <span class="multiply_value">100</span>
+                        </div>
+
+                        <div class="buy_policy">
+                            <input type="radio">
+                            <p>I agree</p><span>|Pre-sale rules|</span>
+                        </div>
+                        <div class="buy_btn">
+                            <p id="buy_form_cancle">Cancle</p>
+                            <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div class="buy_form_div_size" id="buy_form_div_size">
             <section id="buy_color_form" class="buy_form_color">
                 <form action="">
                     <div class="buy_form">
@@ -384,53 +497,54 @@
         }
     </script>
 
-    {% comment %} <script>
+    {% comment %}
+    <script>
         let gameSocket;
         let reconnectInterval;
         let countdown;
         let game_round_id;
-    
+
         function initializeWebSocket() {
             gameSocket = new WebSocket(
                 'wss://' + window.location.host + '/ws/test/'
             );
-    
-            gameSocket.onopen = function() {
+
+            gameSocket.onopen = function () {
                 console.log('WebSocket connection established');
                 clearInterval(reconnectInterval);
             };
-    
+
             gameSocket.onmessage = function (e) {
                 const data = JSON.parse(e.data);
                 console.log(data.game_round);
                 if (data.game_round && data.game_round.id) {
                     game_round_id = data.game_round.game_id; // Update game_round_id
-    
+
                     document.getElementById('game_round_id').innerText = data.game_round.game_id;
                     const timerElement = document.getElementsByClassName('ticket_time')[0];
-    
+
                     // Clear the previous countdown interval if it exists
                     if (countdown) {
                         clearInterval(countdown);
                     }
-    
+
                     startCountdown(timerElement, 30);
                 } else {
                     console.error('Invalid game_round data received:', data.game_round);
                 }
             };
-    
+
             gameSocket.onclose = function (e) {
                 console.error('Game socket closed unexpectedly. Attempting to reconnect...');
                 attemptReconnect();
             };
-    
+
             gameSocket.onerror = function (e) {
                 console.error('WebSocket error:', e);
                 gameSocket.close();
             };
         }
-    
+
         function attemptReconnect() {
             reconnectInterval = setInterval(() => {
                 console.log('Attempting to reconnect...');
@@ -439,7 +553,7 @@
                 }
             }, 2000);
         }
-    
+
         document.getElementById('buy_btn_total').addEventListener('click', () => {
             let amount = document.getElementById('total_amount').value;
             let bet_color = document.getElementById('bet_color').value;
@@ -456,7 +570,7 @@
                 console.error('No game_round_id available.');
             }
         });
-    
+
         function startCountdown(timerElement, duration) {
             let time = duration;
             updateDisplay(timerElement, time);
@@ -468,7 +582,7 @@
                 updateDisplay(timerElement, time);
             }, 1000);
         }
-    
+
         function updateDisplay(timerElement, time) {
             const minutes = Math.floor(time / 60);
             const seconds = time % 60;
@@ -476,24 +590,25 @@
             const minuteOnes = minutes % 10;
             const secondTens = Math.floor(seconds / 10);
             const secondOnes = seconds % 10;
-    
+
             const timeDivs = timerElement.querySelectorAll('.time');
             timeDivs[0].textContent = minuteTens;
             timeDivs[1].textContent = minuteOnes;
             timeDivs[3].textContent = secondTens;
             timeDivs[4].textContent = secondOnes;
         }
-    
+
         // Initialize WebSocket connection when the script is first loaded
         initializeWebSocket();
     </script>
-     {% endcomment %}
+    {% endcomment %}
 
-    {% comment %} <script>
+    {% comment %}
+    <script>
         const winSocket = new WebSocket(
             'ws://' + window.location.host + '/ws/game_result/'
         );
-        
+
         winSocket.onmessage = function (e) {
             const data = JSON.parse(e.data);
             console.log("result herer")
@@ -511,12 +626,12 @@
         const winSocket = new WebSocket(
             'ws://' + window.location.host + '/ws/game_result/'
         );
-        
+
         winSocket.onmessage = function (e) {
             try {
                 const data = JSON.parse(e.data);
                 console.log("result here");
-                
+
                 if (data.game_round) {
                     console.log(data.game_round.win_color);
                     document.getElementById('round_id').innerText = data.game_round.game_id;
@@ -529,13 +644,14 @@
                 console.error("Error parsing message:", error);
             }
         };
-        
+
         winSocket.onclose = function (e) {
             console.error('Winner socket closed unexpectedly');
         };
     </script>
-    
 
+
+    <!-- color bet form  -->
     <script>
 
         // close and open the form
@@ -552,6 +668,47 @@
 
         document.getElementById("buy_form_cancle").addEventListener("click", () => {
             document.getElementById("buy_form_div").classList.toggle("active");
+        })
+
+    </script>
+
+    <!-- number bet form -->
+    <script>
+
+        // close and open the form
+        var color_btn = document.getElementsByClassName("game_number_cl");
+        var selected_color = document.getElementById('selected_color')
+
+        for (let i = 0; i < color_btn.length; i++) {
+            color_btn[i].addEventListener('click', () => {
+                document.getElementById("buy_form_div_size").classList.toggle("active");
+                selected_color.textContent = color_btn[i].textContent
+                selected_color.value = color_btn[i].textContent
+            });
+        }
+
+        document.getElementById("buy_form_cancle").addEventListener("click", () => {
+            document.getElementById("buy_form_div_size").classList.toggle("active");
+        })
+
+    </script>
+    <!-- size bet form -->
+    <script>
+
+        // close and open the form
+        var color_btn = document.getElementsByClassName("game_size_cl");
+        var selected_color = document.getElementById('selected_color')
+
+        for (let i = 0; i < color_btn.length; i++) {
+            color_btn[i].addEventListener('click', () => {
+                document.getElementById("buy_form_div_number").classList.toggle("active");
+                selected_color.textContent = color_btn[i].textContent
+                selected_color.value = color_btn[i].textContent
+            });
+        }
+
+        document.getElementById("buy_form_cancle").addEventListener("click", () => {
+            document.getElementById("buy_form_div_number").classList.toggle("active");
         })
 
     </script>
