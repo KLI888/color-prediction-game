@@ -837,7 +837,7 @@
             var balance = document.querySelectorAll('.balance_value_number');
             var multiply = document.querySelectorAll('.multiply_value_number');
             var quantity = document.getElementById('quantity_value_number');
-            var buy_btn_total = document.getElementById('buy_btn_total_number');
+            var buy_btn_total_number = document.getElementById('buy_btn_total_number');
     
             var new_balance = 1;
             var new_quantity;
@@ -880,7 +880,7 @@
     
             function updateTotalAmount() {
                 var totalAmount = parseInt(new_balance) * parseInt(quantity.textContent);
-                buy_btn_total.value = `Total amount ₹${totalAmount}`;
+                buy_btn_total_number.value = `Total amount ₹${totalAmount}`;
                 document.getElementById('total_amount_number').value = totalAmount;
             }
         });
