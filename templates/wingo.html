@@ -166,8 +166,35 @@
                             <td id="win_color"></td>
                         </tr>
                         <!-- Add more rows as needed -->
+                        {% for result in page_obj %}
+                            <tr>
+                                <td id="round_id">{{ result.round.game_id }}</td>
+                                <td></td>
+                                <td></td>
+                                <td id="win_color"> {{ result.win_color }}</td>
+                            </tr>
+                        {% endfor %}
+
                     </tbody>
+                    
                 </table>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="#" onclick="loadPage(1)">&laquo; first</a>
+                            <a href="#" onclick="loadPage({{ page_obj.previous_page_number }})">previous</a>
+                        {% endif %}
+                        
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        
+                        {% if page_obj.has_next %}
+                            <a href="#" onclick="loadPage({{ page_obj.next_page_number }})">next</a>
+                            <a href="#" onclick="loadPage({{ page_obj.paginator.num_pages }})">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
             </div>
             
         </main>
@@ -220,6 +247,59 @@
             </form>
         </section>
     </section>
+
+    <!-- pagination script start -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function loadPage(pageNumber) {
+            $.ajax({
+                url: window.location.pathname,  // Current URL
+                type: 'GET',
+                data: {
+                    page: pageNumber
+                },
+                success: function(data) {
+                    let resultsDiv = $('#results');
+                    resultsDiv.empty();
+                    
+                    data.round_results.forEach(function(result) {
+                        resultsDiv.append(`
+                            <tr>
+                                <td id="round_id">${result.round__game_id}</td>
+                                <td></td>
+                                <td></td>
+                                <td id="win_color">${result.win_color}</td>
+                            </tr>
+                        `);
+                    });
+
+                    let paginationDiv = $('.pagination .step-links');
+                    paginationDiv.empty();
+
+                    if (data.has_previous) {
+                        paginationDiv.append(`
+                            <a href="#" onclick="loadPage(1)">&laquo; first</a>
+                            <a href="#" onclick="loadPage(${data.previous_page_number})">previous</a>
+                        `);
+                    }
+
+                    paginationDiv.append(`
+                        <span class="current">
+                            Page ${data.current_page} of ${data.num_pages}.
+                        </span>
+                    `);
+
+                    if (data.has_next) {
+                        paginationDiv.append(`
+                            <a href="#" onclick="loadPage(${data.next_page_number})">next</a>
+                            <a href="#" onclick="loadPage(${data.num_pages})">last &raquo;</a>
+                        `);
+                    }
+                }
+            });
+        }
+    </script>
+    <!-- pagination script end -->
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
@@ -408,7 +488,7 @@
         initializeWebSocket();
     </script>
      {% endcomment %}
-     
+
     {% comment %} <script>
         const winSocket = new WebSocket(
             'ws://' + window.location.host + '/ws/game_result/'
