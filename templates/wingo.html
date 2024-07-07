@@ -544,14 +544,14 @@
 
         for (let i = 0; i < color_btn.length; i++) {
             color_btn[i].addEventListener('click', () => {
-                document.getElementById("buy_color_form").classList.toggle("active");
+                document.getElementById("buy_form_div").classList.toggle("active");
                 selected_color.textContent = color_btn[i].textContent
                 selected_color.value = color_btn[i].textContent
             });
         }
 
         document.getElementById("buy_form_cancle").addEventListener("click", () => {
-            document.getElementById("buy_color_form").classList.toggle("active");
+            document.getElementById("buy_form_div").classList.toggle("active");
         })
 
     </script>
