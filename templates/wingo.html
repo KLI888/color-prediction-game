@@ -257,6 +257,9 @@
                 </form>
             </section>
         </div>
+
+
+
         <div class="buy_form_div_number" id="buy_form_div_number">
             <section id="buy_color_form" class="buy_form_color">
                 <form action="">
@@ -809,76 +812,70 @@
     <!-- form amount handeling for number -->
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Close and open the form
-            var number_btn = document.getElementsByClassName("game_number_cl");
-            var selected_number = document.getElementById('selected_number');
-
-            for (let i = 0; i < number_btn.length; i++) {
-                number_btn[i].addEventListener('click', function () {
-                    document.getElementById("buy_form_div_number").classList.toggle("active");
-                    var dataValue = this.getAttribute("data-value");
-                    selected_number.textContent = dataValue;
-                    selected_number.value = dataValue;
-                    document.getElementById("selected_number_input").value = dataValue;
-                    document.getElementById('total_amount_number').value = dataValue;
-                });
-            }
-
-            document.getElementById("form_cancle_number").addEventListener("click", function () {
-                document.getElementById("buy_form_div_number").classList.toggle("active");
-            });
-
-            // Calculating the lot price
-            var balance_number = document.querySelectorAll('.balance_value_number');
-            var multiply_number = document.querySelectorAll('.multiply_value_number');
-            var quantity = document.getElementById('quantity_value_number');
-            var buy_btn_total_number = document.getElementById('buy_btn_total_number');
+        document.addEventListener('DOMContentLoaded', function () {
+            var balance = document.querySelectorAll('.balance_value_number')
+            var multiply = document.querySelectorAll('.multiply_value_number')
+            var quantity = document.getElementById('quantity_value_number')
+            var buy_btn_total_number = document.getElementById('buy_btn_total_number')
 
             var new_balance = 1;
             var new_quantity;
 
-            balance_number.forEach(item => {
+            balance.forEach(item => {
+                console.log(item)
                 item.addEventListener("click", () => {
-                    balance_number.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    new_balance = parseInt(item.textContent);
-                    updateTotalAmount();
-                });
-            });
+                    balance.forEach(i => i.classList.remove('active'))
+                    item.classList.add('active')
+                    buy_btn_total_number.value = `Total amount ₹${parseInt(item.textContent) * parseInt(quantity.textContent)}`
+                    new_balance = parseInt(item.textContent)
+                    document.getElementById('total_amount_number').value = parseInt(item.textContent) * parseInt(quantity.textContent)
+                    // console.log(item.textContent)
 
-            multiply_number.forEach(item => {
+                })
+            })
+
+            console.log(new_balance);
+
+            multiply.forEach(item => {
+                console.log(item)
                 item.addEventListener("click", () => {
-                    multiply_number.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    quantity.textContent = item.textContent;
-                    updateTotalAmount();
-                });
-            });
+                    multiply.forEach(i => i.classList.remove('active'))
+                    item.classList.add('active')
+                    quantity.textContent = item.textContent
+                    // console.log(new_balance)
+
+                    buy_btn_total_number.value = `Total amount ₹${parseInt(new_balance) * parseInt(item.textContent)}`
+                    document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(item.textContent)
+                    // console.log(item.textContent)
+                    new_quantity = parseInt(item.textContent)
+                    console.log(new_balance)
+
+                })
+            })
 
             document.getElementById('dec_quantity_number').addEventListener('click', () => {
                 if (quantity.textContent == 1) {
-                    quantity.textContent = 1;
+                    quantity.textContent = 1
                 } else {
                     quantity.textContent = parseInt(quantity.textContent) - 1;
-                    updateTotalAmount();
+                    new_quantity = parseInt(quantity.textContent)
+                    buy_btn_total_number.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                    document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
                 }
-            });
+            })
 
             document.getElementById('inc_quantity_number').addEventListener('click', () => {
                 if (quantity.textContent == 1000) {
-                    quantity.textContent = 1000;
+                    quantity.textContent = 1000
                 } else {
                     quantity.textContent = parseInt(quantity.textContent) + 1;
-                    updateTotalAmount();
-                }
-            });
+                    new_quantity = parseInt(quantity.textContent)
+                    buy_btn_total_number.value = `Total amount ₹${parseInt(new_balance) * parseInt(new_quantity)}`
+                    document.getElementById('total_amount_number').value = parseInt(new_balance) * parseInt(new_quantity)
 
-            function updateTotalAmount() {
-                var totalAmount = parseInt(new_balance) * parseInt(quantity.textContent);
-                buy_btn_total_number.value = `Total amount ₹${totalAmount}`;
-                document.getElementById('total_amount_number').value = totalAmount;
-            }
+                }
+            })
+
         });
     </script>
 
