@@ -408,7 +408,8 @@
         initializeWebSocket();
     </script>
      {% endcomment %}
-    <script>
+     
+    {% comment %} <script>
         const winSocket = new WebSocket(
             'ws://' + window.location.host + '/ws/game_result/'
         );
@@ -424,7 +425,7 @@
         winSocket.onclose = function (e) {
             console.error('Winner socket closed unexpectedly');
         };
-    </script>
+    </script> {% endcomment %}
 
     <script>
         const winSocket = new WebSocket(
@@ -454,7 +455,7 @@
         };
     </script>
     
-{% comment %} 
+
     <script>
 
         // close and open the form
@@ -474,7 +475,6 @@
         })
 
     </script>
- {% endcomment %}
 
     <script>
         // calculating the lot price
