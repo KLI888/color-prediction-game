@@ -208,12 +208,12 @@
 
         <div class="buy_form_div" id="buy_form_div">
             <section id="buy_color_form" class="buy_form_color">
-                <form action="">
+                <form id="buy_form" action="">
                     <div class="buy_form">
                         <div class="buy_heading">
                             <h3>Win Go 30Seconds</h3>
                             <p>Selected: <span id="selected_color"></span></p>
-                            <input type="hidden" name="" value="" id="selected_color_input">
+                            <input type="hidden" name="bet_color" value="" id="selected_color_input">
                         </div>
 
 
@@ -250,8 +250,8 @@
                         <div class="buy_btn">
                             <p id="buy_form_cancle">Cancle</p>
                             <input type="hidden" value="1" name="total_amount" id="total_amount">
-                            <input type="hidden" name="bet_color" id="bet_color">
-                            <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
+                            <input type="hidden" name="id" value="" id="game_id">
+                            <input id="buy_btn_total" type="button" value="Total amount ₹1.00">
                         </div>
                     </div>
                 </form>
@@ -362,11 +362,35 @@
 
 
 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
         integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- bet form submit -->
+    <script>
+        document.getElementById('buy_btn_total').addEventListener('click', function() {
+            const form = document.getElementById('buy_form');
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json()) // Assuming the server responds with JSON
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success, e.g., display a message or update the UI
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error
+            });
+        });
+        </script>
+    
 
+    <!-- websocket api -->
     <script>
         const gameSocket = new WebSocket(
             'ws://' + window.location.host + '/ws/test/'
@@ -444,131 +468,6 @@
         }
     </script>
 
-    {% comment %}
-    <script>
-        let gameSocket;
-        let reconnectInterval;
-        let countdown;
-        let game_round_id;
-
-        function initializeWebSocket() {
-            gameSocket = new WebSocket(
-                'wss://' + window.location.host + '/ws/test/'
-            );
-
-            gameSocket.onopen = function () {
-                console.log('WebSocket connection established');
-                clearInterval(reconnectInterval);
-            };
-
-            gameSocket.onmessage = function (e) {
-                const data = JSON.parse(e.data);
-                console.log(data.game_round);
-                if (data.game_round && data.game_round.id) {
-                    game_round_id = data.game_round.game_id; // Update game_round_id
-
-                    document.getElementById('game_round_id').innerText = data.game_round.game_id;
-                    const timerElement = document.getElementsByClassName('ticket_time')[0];
-
-                    // Clear the previous countdown interval if it exists
-                    if (countdown) {
-                        clearInterval(countdown);
-                    }
-
-                    startCountdown(timerElement, 30);
-                } else {
-                    console.error('Invalid game_round data received:', data.game_round);
-                }
-            };
-
-            gameSocket.onclose = function (e) {
-                console.error('Game socket closed unexpectedly. Attempting to reconnect...');
-                attemptReconnect();
-            };
-
-            gameSocket.onerror = function (e) {
-                console.error('WebSocket error:', e);
-                gameSocket.close();
-            };
-        }
-
-        function attemptReconnect() {
-            reconnectInterval = setInterval(() => {
-                console.log('Attempting to reconnect...');
-                if (gameSocket.readyState === WebSocket.CLOSED || gameSocket.readyState === WebSocket.CLOSING) {
-                    initializeWebSocket();
-                }
-            }, 2000);
-        }
-
-        document.getElementById('buy_btn_total').addEventListener('click', () => {
-            let amount = document.getElementById('total_amount').value;
-            let bet_color = document.getElementById('bet_color').value;
-            if (game_round_id) {
-                console.log('Game round ID:', game_round_id);
-                axios.post('/api/game_bet', { id: game_round_id, amount: amount, bet_color: bet_color })
-                    .then(response => {
-                        console.log('Bet response:', response.data);
-                    })
-                    .catch(error => {
-                        console.error('Error making bet request:', error);
-                    });
-            } else {
-                console.error('No game_round_id available.');
-            }
-        });
-
-        function startCountdown(timerElement, duration) {
-            let time = duration;
-            updateDisplay(timerElement, time);
-            countdown = setInterval(() => {
-                time--;
-                if (time < 0) {
-                    time = duration;
-                }
-                updateDisplay(timerElement, time);
-            }, 1000);
-        }
-
-        function updateDisplay(timerElement, time) {
-            const minutes = Math.floor(time / 60);
-            const seconds = time % 60;
-            const minuteTens = Math.floor(minutes / 10);
-            const minuteOnes = minutes % 10;
-            const secondTens = Math.floor(seconds / 10);
-            const secondOnes = seconds % 10;
-
-            const timeDivs = timerElement.querySelectorAll('.time');
-            timeDivs[0].textContent = minuteTens;
-            timeDivs[1].textContent = minuteOnes;
-            timeDivs[3].textContent = secondTens;
-            timeDivs[4].textContent = secondOnes;
-        }
-
-        // Initialize WebSocket connection when the script is first loaded
-        initializeWebSocket();
-    </script>
-    {% endcomment %}
-
-    {% comment %}
-    <script>
-        const winSocket = new WebSocket(
-            'wss://' + window.location.host + '/ws/game_result/'
-        );
-
-        winSocket.onmessage = function (e) {
-            const data = JSON.parse(e.data);
-            console.log("result herer")
-            console.log(data.game_round.win_color);
-            document.getElementById('round_id').innerText = data.game_round.game_id
-            document.getElementById('win_color').innerText = data.game_round.win_color
-            console.log("result showed")
-        };
-        winSocket.onclose = function (e) {
-            console.error('Winner socket closed unexpectedly');
-        };
-    </script> {% endcomment %}
-
     <script>
         const winSocket = new WebSocket(
             'ws://' + window.location.host + '/ws/game_result/'
@@ -583,6 +482,7 @@
                     console.log(data.game_round.win_color);
                     document.getElementById('round_id').innerText = data.game_round.game_id;
                     document.getElementById('win_color').innerText = data.game_round.win_color;
+                    document.getElementById('game_id').value = data.game_round.game_id
                     console.log("result showed");
                 } else {
                     console.error("game_round is undefined");
@@ -596,6 +496,8 @@
             console.error('Winner socket closed unexpectedly');
         };
     </script>
+
+
 
 
     <!-- color bet form  -->
@@ -643,6 +545,7 @@
         })
 
     </script>
+
     <!-- size bet form -->
     <script>
 

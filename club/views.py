@@ -204,8 +204,8 @@ def user_bet(request):
             profile = Profile.objects.get(user=user)
             round_id = data.get('id')
             bet_color = data.get('bet_color')
-            bet_amount = data.get('amount')
-            bet_amount = float(bet_amount)
+            bet_amount = data.get('total_amount')
+            bet_amount = int(bet_amount)
 
             game_round = GameRound.objects.get(game_id=round_id)
             
