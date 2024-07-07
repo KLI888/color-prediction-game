@@ -248,6 +248,8 @@
                         </div>
                         <div class="buy_btn">
                             <p id="buy_form_cancle">Cancle</p>
+                            <input type="hidden" name="total_amount" id="total_amount">
+                            <input type="hidden" name="bet_color" id="bet_color">
                             <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
                         </div>
                     </div>
@@ -260,6 +262,7 @@
                     <div class="buy_form">
                         <div class="buy_heading">
                             <h3>Win Go 30Seconds</h3>
+                            <input type="hidden" name="" value="" id="selected_number_input">
                             <p>Selected: <span id="selected_number">None</span></p>
                         </div>
 
@@ -296,6 +299,7 @@
                         </div>
                         <div class="buy_btn">
                             <p id="form_cancle_number">Cancle</p>
+                            <input type="hidden" name="" value="" id="total_amount_number">
                             <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
                         </div>
                     </div>
@@ -308,6 +312,7 @@
                     <div class="buy_form">
                         <div class="buy_heading">
                             <h3>Win Go 30Seconds</h3>
+                            <input type="hidden" name="" value="" id="selected_size_input">
                             <p>Selected: <span id="selected_size">None</span></p>
                         </div>
 
@@ -344,6 +349,7 @@
                         </div>
                         <div class="buy_btn">
                             <p id="form_cancle_size">Cancle</p>
+                            <input type="hidden" name="" value="" id="total_amount_size">
                             <input id="buy_btn_total" type="submit" value="Total amount ₹1.00">
                         </div>
                     </div>
@@ -676,6 +682,8 @@
                 var dataValue = this.getAttribute("data-value");
                 selected_number.textContent = dataValue
                 selected_number.value = dataValue
+                document.getElementById("selected_number_input").value = dataValue
+                document.getElementById('total_amount_number').value = dataValue
             });
         }
 
@@ -696,6 +704,8 @@
                 document.getElementById("buy_form_div_size").classList.toggle("active");
                 selected_size.textContent = size_btn[i].textContent
                 selected_size.value = size_btn[i].textContent
+                document.getElementById("selected_size_input").value = size_btn[i].textContent
+                document.getElementById('total_amount_size').value = size_btn[i].textContent
             });
         }
 
