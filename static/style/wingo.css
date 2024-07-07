@@ -425,7 +425,7 @@ main {
 .buy_form_div_number.active {
     display: block;
 }
-.buy_form_color {
+.buy_form_div_number .buy_form_color {
     /* display: none; */
     width: 100%;
     max-width: 425px;
@@ -435,7 +435,7 @@ main {
     border-radius: 20px 20px 0 0;
     bottom: 0;
 }
-.buy_form_color .buy_heading {
+.buy_form_div_number .buy_form_color .buy_heading {
     background-color: #6EA8F4;
     text-align: center;
     padding: 20px;
@@ -443,14 +443,14 @@ main {
 
 }
 
-.buy_heading h3 {
+.buy_form_div_number .buy_heading h3 {
     color: #fff;
     font-size: 22px;
     margin-bottom: 10px;
 }
 
 
-.buy_heading p {
+.buy_form_div_number .buy_heading p {
     color: #111;
     background-color: #fff;
     font-size: 14px;
@@ -459,50 +459,50 @@ main {
 }
 
 
-.buy_balance {
+.buy_form_div_number .buy_balance {
     margin-top: 20px;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-self: center;
 }
-.buy_balance span {
+.buy_form_div_number .buy_balance span {
     cursor: pointer;
     background-color: #f7f3f3;
     padding: 10px;
     font-size: 14px;
     border-radius: 5px;
 }
-.buy_balance span.active {
+.buy_form_div_number .buy_balance span.active {
     background-color: #6EA8F4;
     color: #fff;
 }
 
-.buy_quantity {
+.buy_form_div_number .buy_quantity {
     margin-top: 0px;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-self: center;
 }
-.buy_quantity span {
+.buy_form_div_number .buy_quantity span {
     cursor: pointer;
     background-color: #f7f3f3;
     padding: 10px;
     font-size: 14px;
     border-radius: 5px;
 }
-.buy_quantity span.active {
+.buy_form_div_number .buy_quantity span.active {
     background-color: #6EA8F4;
     color: #fff;
 }
 
-.buy_multiply {
+.buy_form_div_number .buy_multiply {
     display: flex;
     padding: 0 20px;
     justify-content: end;
 }
-.buy_multiply span {
+.buy_form_div_number .buy_multiply span {
     cursor: pointer;
     background-color: #f7f3f3;
     color: #111;
@@ -510,33 +510,33 @@ main {
     border-radius: 10px;
     font-size: 14px;
 }
-.buy_multiply span.active {
+.buy_form_div_number .buy_multiply span.active {
     background-color: #6EA8F4;
     color: #fff;
 }
 
-.buy_policy {
+.buy_form_div_number .buy_policy {
     margin: 10px 20px;
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 10px;
 }
-.buy_policy p {
+.buy_form_div_number .buy_policy p {
     font-size: 14px;
 }
-.buy_policy span {
+.buy_form_div_number .buy_policy span {
     font-size: 16px;
     color: #F95959;
 }
 
-.buy_btn {
+.buy_form_div_number .buy_btn {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.buy_btn p {
+.buy_form_div_number .buy_btn p {
     cursor: pointer;
     padding: 10px;
     font-size: 18px;
@@ -546,7 +546,7 @@ main {
     text-align: center;
 }
 
-.buy_btn input {
+.buy_form_div_number .buy_btn input {
     flex: 2;
     padding: 10px;
     font-size: 18px;
@@ -555,6 +555,10 @@ main {
     border: none;
     outline: none;
 }
+
+
+
+
 
 
 
@@ -572,7 +576,7 @@ main {
 .buy_form_div_size.active {
     display: block;
 }
-.buy_form_color {
+.buy_form_div_size .buy_form_color {
     /* display: none; */
     width: 100%;
     max-width: 425px;
@@ -582,7 +586,7 @@ main {
     border-radius: 20px 20px 0 0;
     bottom: 0;
 }
-.buy_form_color .buy_heading {
+.buy_form_div_size .buy_form_color .buy_heading {
     background-color: #FEAA57;
     text-align: center;
     padding: 20px;
@@ -590,14 +594,14 @@ main {
 
 }
 
-.buy_heading h3 {
+.buy_form_div_size .buy_heading h3 {
     color: #fff;
     font-size: 22px;
     margin-bottom: 10px;
 }
 
 
-.buy_heading p {
+.buy_form_div_size .buy_heading p {
     color: #111;
     background-color: #fff;
     font-size: 14px;
@@ -606,50 +610,50 @@ main {
 }
 
 
-.buy_balance {
+.buy_form_div_size .buy_balance {
     margin-top: 20px;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-self: center;
 }
-.buy_balance span {
+.buy_form_div_size .buy_balance span {
     cursor: pointer;
     background-color: #f7f3f3;
     padding: 10px;
     font-size: 14px;
     border-radius: 5px;
 }
-.buy_balance span.active {
+.buy_form_div_size .buy_balance span.active {
     background-color: #FEAA57;
     color: #fff;
 }
 
-.buy_quantity {
+.buy_form_div_size .buy_quantity {
     margin-top: 0px;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-self: center;
 }
-.buy_quantity span {
+.buy_form_div_size .buy_quantity span {
     cursor: pointer;
     background-color: #f7f3f3;
     padding: 10px;
     font-size: 14px;
     border-radius: 5px;
 }
-.buy_quantity span.active {
+.buy_form_div_size .buy_quantity span.active {
     background-color: #FEAA57;
     color: #fff;
 }
 
-.buy_multiply {
+.buy_form_div_size .buy_multiply {
     display: flex;
     padding: 0 20px;
     justify-content: end;
 }
-.buy_multiply span {
+.buy_form_div_size .buy_multiply span {
     cursor: pointer;
     background-color: #f7f3f3;
     color: #111;
@@ -657,33 +661,33 @@ main {
     border-radius: 10px;
     font-size: 14px;
 }
-.buy_multiply span.active {
+.buy_form_div_size .buy_multiply span.active {
     background-color: #FEAA57;
     color: #fff;
 }
 
-.buy_policy {
+.buy_form_div_size .buy_policy {
     margin: 10px 20px;
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 10px;
 }
-.buy_policy p {
+.buy_form_div_size .buy_policy p {
     font-size: 14px;
 }
-.buy_policy span {
+.buy_form_div_size .buy_policy span {
     font-size: 16px;
     color: #F95959;
 }
 
-.buy_btn {
+.buy_form_div_size .buy_btn {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.buy_btn p {
+.buy_form_div_size .buy_btn p {
     cursor: pointer;
     padding: 10px;
     font-size: 18px;
@@ -693,7 +697,7 @@ main {
     text-align: center;
 }
 
-.buy_btn input {
+.buy_form_div_size .buy_btn input {
     flex: 2;
     padding: 10px;
     font-size: 18px;
