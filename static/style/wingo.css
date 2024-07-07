@@ -436,7 +436,7 @@ main {
     bottom: 0;
 }
 .buy_form_color .buy_heading {
-    background-color: #18B660;
+    background-color: #6EA8F4;
     text-align: center;
     padding: 20px;
     border-radius: 20px 20px 0 0;
@@ -474,7 +474,7 @@ main {
     border-radius: 5px;
 }
 .buy_balance span.active {
-    background-color: #18B660;
+    background-color: #6EA8F4;
     color: #fff;
 }
 
@@ -493,7 +493,7 @@ main {
     border-radius: 5px;
 }
 .buy_quantity span.active {
-    background-color: #18B660;
+    background-color: #6EA8F4;
     color: #fff;
 }
 
@@ -511,7 +511,7 @@ main {
     font-size: 14px;
 }
 .buy_multiply span.active {
-    background-color: #18B660;
+    background-color: #6EA8F4;
     color: #fff;
 }
 
@@ -550,7 +550,7 @@ main {
     flex: 2;
     padding: 10px;
     font-size: 18px;
-    background-color: #18B660;
+    background-color: #6EA8F4;
     color: #fff;
     border: none;
     outline: none;
@@ -560,7 +560,7 @@ main {
 
 
 
-/* buy form div two */
+/* buy form div three */
 .buy_form_div_size {
     width: 100%;
     height: 100%;
@@ -583,7 +583,7 @@ main {
     bottom: 0;
 }
 .buy_form_color .buy_heading {
-    background-color: #18B660;
+    background-color: #FEAA57;
     text-align: center;
     padding: 20px;
     border-radius: 20px 20px 0 0;
@@ -621,7 +621,7 @@ main {
     border-radius: 5px;
 }
 .buy_balance span.active {
-    background-color: #18B660;
+    background-color: #FEAA57;
     color: #fff;
 }
 
@@ -640,7 +640,7 @@ main {
     border-radius: 5px;
 }
 .buy_quantity span.active {
-    background-color: #18B660;
+    background-color: #FEAA57;
     color: #fff;
 }
 
@@ -658,7 +658,7 @@ main {
     font-size: 14px;
 }
 .buy_multiply span.active {
-    background-color: #18B660;
+    background-color: #FEAA57;
     color: #fff;
 }
 
@@ -697,7 +697,7 @@ main {
     flex: 2;
     padding: 10px;
     font-size: 18px;
-    background-color: #18B660;
+    background-color: #FEAA57;
     color: #fff;
     border: none;
     outline: none;
