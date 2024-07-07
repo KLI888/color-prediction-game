@@ -16,6 +16,7 @@ import json
 
 
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 
 
 
