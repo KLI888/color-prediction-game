@@ -116,9 +116,7 @@ def test_func(self):
 
     def updateBalance(winning_color):
         try:
-            # game_round = GameRound.objects.get(id=game_round.id)
             bets_on_round = Bet.objects.filter(round=game_round, color=winning_color).select_related('user')
-
             user_bets = []
             for bet in bets_on_round:
                 user_bets.append({
@@ -132,16 +130,8 @@ def test_func(self):
             for user_bet in user_bets:
                 user = User.objects.get(id=user_bet['user_id'])
                 profile = Profile.objects.get(user=user)
-                
-                # Calculate new_balance based on the bet amount
                 bet_amount = int(user_bet['bet_amount'])
-                if user_bet['bet_color'] == winning_color:
-                    new_balance = bet_amount * 2  # Double the bet amount for winners
-                else:
-                    new_balance = 0  # No change for non-winners
-                
-                print(f"User: {user.username}, Bet Color: {user_bet['bet_color']}, Winning Color: {winning_color}, Bet Amount: {bet_amount}, New Balance: {new_balance}")
-
+                new_balance = bet_amount * 2 if user_bet['bet_color'] == winning_color else 0
                 profile.user_balance += new_balance
                 profile.total_balance += new_balance
                 profile.save()
@@ -158,13 +148,10 @@ def test_func(self):
 
     winning_color = ""
     if green_amount < red_amount and green_amount < violet_amount:
-        # green_amount
         winning_color = "Green"
     elif red_amount < green_amount and red_amount < violet_amount:
-        # red_amount
         winning_color = "Red"
     else:
-        # violet_amount
         winning_color = "Violet"
 
     roundWinColor.win_color = winning_color
@@ -172,11 +159,10 @@ def test_func(self):
     updateBalance(winning_color)
     serializer = GameWin(roundWinColor)
     roundWinColor_data = serializer.data
-    channel_layer = get_channel_layer()
     async_to_sync(channel_layer.group_send)(
         'test_consumer_group', {
-            'type': 'game_round_result',
-            'game_round_winner': roundWinColor_data
+            'type': 'game_round_message',
+            'game_round': roundWinColor_data
         }
     )
 

@@ -426,11 +426,35 @@
         };
     </script>
 
-    <!-- <script>
-
-       
-    </script> -->
-
+    <script>
+        const winSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/game_result/'
+        );
+        
+        winSocket.onmessage = function (e) {
+            try {
+                const data = JSON.parse(e.data);
+                console.log("result here");
+                
+                if (data.game_round) {
+                    console.log(data.game_round.win_color);
+                    document.getElementById('round_id').innerText = data.game_round.game_id;
+                    document.getElementById('win_color').innerText = data.game_round.win_color;
+                    console.log("result showed");
+                } else {
+                    console.error("game_round is undefined");
+                }
+            } catch (error) {
+                console.error("Error parsing message:", error);
+            }
+        };
+        
+        winSocket.onclose = function (e) {
+            console.error('Winner socket closed unexpectedly');
+        };
+    </script>
+    
+{% comment %} 
     <script>
 
         // close and open the form
@@ -450,7 +474,7 @@
         })
 
     </script>
-
+ {% endcomment %}
 
     <script>
         // calculating the lot price
