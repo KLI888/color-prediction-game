@@ -211,7 +211,7 @@
                 <form action="">
                     <div class="buy_form">
                         <div class="buy_heading">
-                            <h3>Win Go 5Min</h3>
+                            <h3>Win Go 30Seconds</h3>
                             <p>Selected: <span id="selected_color"></span></p>
                             <input type="hidden" name="" value="" id="selected_color_input">
                         </div>
@@ -812,6 +812,65 @@
 
     <!-- form amount handeling for number -->
     <script>
+        // Wait for the DOM to fully load
+        document.addEventListener("DOMContentLoaded", function() {
+            var balance = document.querySelectorAll('.balance_value_number');
+            var multiply = document.querySelectorAll('.multiply_value_number');
+            var quantity = document.getElementById('quantity_value_number');
+            var buy_btn_total = document.getElementById('buy_btn_total_number');
+    
+            var new_balance = 1;
+            var new_quantity;
+    
+            balance.forEach(item => {
+                item.addEventListener("click", () => {
+                    balance.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    new_balance = parseInt(item.textContent);
+                    updateTotalAmount();
+                });
+            });
+    
+            multiply.forEach(item => {
+                item.addEventListener("click", () => {
+                    multiply.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    quantity.textContent = item.textContent;
+                    updateTotalAmount();
+                });
+            });
+    
+            document.getElementById('dec_quantity_number').addEventListener('click', () => {
+                if (quantity.textContent == 1) {
+                    quantity.textContent = 1;
+                } else {
+                    quantity.textContent = parseInt(quantity.textContent) - 1;
+                    updateTotalAmount();
+                }
+            });
+    
+            document.getElementById('inc_quantity_number').addEventListener('click', () => {
+                if (quantity.textContent == 1000) {
+                    quantity.textContent = 1000;
+                } else {
+                    quantity.textContent = parseInt(quantity.textContent) + 1;
+                    updateTotalAmount();
+                }
+            });
+    
+            function updateTotalAmount() {
+                var totalAmount = parseInt(new_balance) * parseInt(quantity.textContent);
+                buy_btn_total.value = `Total amount ₹${totalAmount}`;
+                document.getElementById('total_amount_number').value = totalAmount;
+            }
+    
+            // Cancel button functionality
+            document.getElementById("form_cancle_number").addEventListener("click", function() {
+                document.getElementById("buy_form_div_number").classList.toggle("active");
+            });
+        });
+    </script>
+    <!-- <script>
         // calculating the lot price
 
         var balance = document.querySelectorAll('.balance_value_number');
@@ -887,7 +946,7 @@
             }
         })
 
-    </script>
+    </script> -->
 
     <!-- form amount handeling for size -->
     <script>
