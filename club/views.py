@@ -180,11 +180,18 @@ def wingoPage(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # try:
-    #     # latest_round = GameRound.objects.latest('created_at')
-    #     pass
-    # except GameRound.DoesNotExist:
-    #     latest_round = None
+    if request.is_ajax():
+        round_results_list = list(page_obj.object_list.values('id', 'round', 'win_color'))
+        data = {
+            'round_results': round_results_list,
+            'has_previous': page_obj.has_previous(),
+            'has_next': page_obj.has_next(),
+            'previous_page_number': page_obj.previous_page_number() if page_obj.has_previous() else None,
+            'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None,
+            'num_pages': paginator.num_pages,
+            'current_page': page_obj.number,
+        }
+        return JsonResponse(data)
     if request.method=='POST':
         bet_amount = request.POST['total_amount']
         bet_color = request.POST['bet_color']
