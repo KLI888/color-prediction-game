@@ -456,11 +456,11 @@
         
         // buy form submit for size
         document.getElementById('buy_btn_total_size').addEventListener('click', () => {
-            let amount = document.getElementById('total_amount_size').value;
+            let amount = parseFloat(document.getElementById('total_amount_size').value);  // Ensure amount is parsed as float
             let bet_size = document.getElementById('selected_size_input').value;
             let round_id = document.getElementById('game_id').value;
 
-            console.log(`Sending bet_number: ${bet_size}`);
+            console.log(`Sending bet_size: ${bet_size}`);
             console.log(`Sending amount: ${amount}`);
 
             axios.post('/api/game_bet_size', { id: round_id, total_amount_size: amount, bet_size: bet_size })
@@ -484,7 +484,6 @@
                     console.log("Error placing bet");
                 });
         });
-
 
 
         function startCountdown(timerElement, duration) {
