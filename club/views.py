@@ -253,7 +253,7 @@ def user_bet_number(request):
             data = json.loads(request.body.decode('utf-8'))
             profile = Profile.objects.get(user=user)
             round_id = data.get('id')
-            bet_number = data.get('bet_number')
+            bet_number = data.get('selected_number_input')
             bet_amount = data.get('total_amount_number')
             bet_amount = int(bet_amount)
 
