@@ -188,13 +188,11 @@ def wingoPage(request):
 
     return render(request, 'wingo.html', {'profile': profile, 'page_obj': page_obj})
 
-
-
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import GameRound, Bet
+from .models import GameRound, Bet, Profile, RoundWinColor
 import json
-# from decimal import Decimal
+
 @csrf_exempt
 def user_bet(request):
     if request.method == 'POST':
@@ -214,28 +212,26 @@ def user_bet(request):
                 bet.save()
                 profile.user_balance -= bet_amount
                 profile.save()
-                roundWinColor = RoundWinColor.objects.get(round=game_round)
-                if bet_color =="Green":
-                    roundWinColor.green_bet_amount += bet_amount
-                    roundWinColor.save()
+                round_win_color = RoundWinColor.objects.get(round=game_round)
+                if bet_color == "Green":
+                    round_win_color.green_bet_amount += bet_amount
                 elif bet_color == "Violet":
-                    roundWinColor.violet_bet_amount += bet_amount
-                    roundWinColor.save()
+                    round_win_color.violet_bet_amount += bet_amount
                 else:
-                    roundWinColor.red_bet_amount += bet_amount
-                    roundWinColor.save()
+                    round_win_color.red_bet_amount += bet_amount
+                round_win_color.save()
                 
                 return JsonResponse({'message': 'success'})
             else:
                 return JsonResponse({'message': 'error insufficient balance'})
-                print("insufficient balance")
-
-
+        
         except GameRound.DoesNotExist:
             return JsonResponse({'error': 'Game round does not exist'}, status=404)
         
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': 'User profile does not exist'}, status=404)
+        
         except Exception as e:
-            print(e)
             return JsonResponse({'error': str(e)}, status=500)
     
     return JsonResponse({'error': 'Invalid request method'}, status=405)

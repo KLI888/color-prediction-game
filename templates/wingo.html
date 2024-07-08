@@ -307,7 +307,7 @@
                 </form>
             </section>
         </div>
-        
+
         <div class="buy_form_div_size" id="buy_form_div_size">
             <section id="buy_color_form" class="buy_form_color">
                 <form action="">
@@ -368,27 +368,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- bet form submit -->
-    <script>
-        document.getElementById('buy_btn_total').addEventListener('click', function() {
-            const form = document.getElementById('buy_form');
-            const formData = new FormData(form);
-            
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json()) // Assuming the server responds with JSON
-            .then(data => {
-                console.log('Success:', data);
-                // Handle success, e.g., display a message or update the UI
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                // Handle error
-            });
-        });
-        </script>
-    
+
+
 
     <!-- websocket api -->
     <script>
@@ -426,18 +407,19 @@
         document.getElementById('buy_btn_total').addEventListener('click', () => {
             let amount = document.getElementById('total_amount').value;
             let bet_color = document.getElementById('selected_color_input').value;
-            if (game_round_id) {
-                console.log('Game round ID:', game_round_id);
-                axios.post('/api/game_bet', { id: game_round_id, amount: amount, bet_color: bet_color })
-                    .then(response => {
-                        console.log('Bet response:', response.data);
-                    })
-                    .catch(error => {
-                        console.error('Error making bet request:', error);
-                    });
-            } else {
-                console.error('No game_round_id available.');
-            }
+            let round_id = document.getElementById('game_id').value;
+
+            axios.post('/api/game_bet', { id: round_id, total_amount: amount, bet_color: bet_color })
+                .then(response => {
+                    console.log('Bet response:', response.data);
+                    // Handle success response here, e.g., show message to user
+                    alert('Bet placed successfully!');
+                })
+                .catch(error => {
+                    console.error('Error making bet request:', error);
+                    // Handle error response here, e.g., show error message to user
+                    alert('Error placing bet: ' + error.message);
+                });
         });
 
         function startCountdown(timerElement, duration) {
