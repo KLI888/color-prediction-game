@@ -432,11 +432,11 @@
             axios.post('/api/game_bet_number', { id: round_id, total_amount_number: amount, bet_number: bet_number })
                 .then(response => {
                     console.log('Bet response:', response.data);
-                    console.log("Bet Placed")
+                    console.log("Bet Placed");
                 })
                 .catch(error => {
                     console.error('Error making bet request:', error);
-                    console.log("Error placing bet")
+                    console.log("Error placing bet");
                 });
         });
 

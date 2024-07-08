@@ -240,6 +240,10 @@ def user_bet(request):
 
 
 
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Profile, GameRound, Bet, RoundWinNumber
 
 @csrf_exempt
 def user_bet_number(request):
@@ -255,14 +259,16 @@ def user_bet_number(request):
 
             game_round = GameRound.objects.get(game_id=round_id)
 
-            print("Bet is places hererrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
-            
+            print("Bet is being placed...")
+
             if profile.user_balance >= bet_amount:
                 bet = Bet.objects.create(user=user, round=game_round, number=bet_number, amount=bet_amount)
-                bet.save()
                 profile.user_balance -= bet_amount
                 profile.save()
-                round_win_number = RoundWinNumber.objects.get(round=game_round.id)
+
+                round_win_number = RoundWinNumber.objects.get(round=game_round)
+
+                # Update the corresponding bet amount
                 if bet_number == "0":
                     round_win_number.zero_bet_amount += bet_amount
                 elif bet_number == "1":
@@ -281,20 +287,23 @@ def user_bet_number(request):
                     round_win_number.seven_bet_amount += bet_amount
                 elif bet_number == "8":
                     round_win_number.eight_bet_amount += bet_amount
+                elif bet_number == "9":
+                    round_win_number.nine_bet_amount += bet_amount
                 else:
-                    round_win_color.nine_bet_amount += bet_amount
+                    return JsonResponse({'error': 'Invalid bet number'}, status=400)
+
                 round_win_number.save()
-                
+
                 return JsonResponse({'message': 'success'})
             else:
                 return JsonResponse({'message': 'error insufficient balance'})
-        
+
         except GameRound.DoesNotExist:
             return JsonResponse({'error': 'Game round does not exist'}, status=404)
         
         except Profile.DoesNotExist:
             return JsonResponse({'error': 'User profile does not exist'}, status=404)
-        
+
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
     
