@@ -37,13 +37,9 @@ class RoundWinNumberSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class GameWinSerializer(serializers.ModelSerializer):
-    roundWinColor = RoundWinColorSerializer()
-    roundWinSize = RoundWinSizeSerializer()
-    roundWinNumber = RoundWinNumberSerializer()
-
     class Meta:
         model = RoundWinAll
-        fields = ('id', 'game_id', 'roundWinColor', 'roundWinSize', 'roundWinNumber')
+        fields = ('id', 'round', 'win_color', 'win_number', 'win_size')
 
     def get_game_id(self, obj):
         return obj.round.game_id

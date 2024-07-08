@@ -158,9 +158,12 @@ class RoundWinColor(models.Model):
     
 class RoundWinAll(models.Model):
     round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
-    roundWinColor = models.ForeignKey(RoundWinColor, on_delete=models.CASCADE)
-    roundWinSize = models.ForeignKey(RoundWinSize, on_delete=models.CASCADE)
-    roundWinNumber = models.ForeignKey(RoundWinNumber, on_delete=models.CASCADE)
+    # roundWinColor = models.ForeignKey(RoundWinColor, on_delete=models.CASCADE)
+    # roundWinSize = models.ForeignKey(RoundWinSize, on_delete=models.CASCADE)
+    # roundWinNumber = models.ForeignKey(RoundWinNumber, on_delete=models.CASCADE)
+    win_color = models.CharField(max_length=50, null=True, blank=True)
+    win_number = models.CharField(max_length=50, null=True, blank=True)
+    win_size = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return f"Round Win {round}"
