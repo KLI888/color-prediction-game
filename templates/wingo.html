@@ -425,7 +425,7 @@
 
         document.getElementById('buy_btn_total').addEventListener('click', () => {
             let amount = document.getElementById('total_amount').value;
-            let bet_color = document.getElementById('bet_color').value;
+            let bet_color = document.getElementById('selected_color_input').value;
             if (game_round_id) {
                 console.log('Game round ID:', game_round_id);
                 axios.post('/api/game_bet', { id: game_round_id, amount: amount, bet_color: bet_color })
