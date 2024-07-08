@@ -95,7 +95,7 @@ from .models import *
 from django.utils import timezone
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
-from .serializers import GameRoundSerializer, GameWin
+from .serializers import GameRoundSerializer, GameWinSerializer
 import time
 from django.contrib.auth.models import User
 
@@ -265,12 +265,13 @@ def test_func(self):
 
 
 
-    serializer = GameWin(roundWinColor)
-    roundWinColor_data = serializer.data
+    roundWinAll = RoundWinAll.objects.create(round=game_round, roundWinColor=roundWinColor, roundWinNumber=roundWinNumber, roundWinSize=roundWinSize)
+    serializer = GameWinSerializer(roundWinAll)
+    roundWinAll_data = serializer.data
     async_to_sync(channel_layer.group_send)(
         'test_consumer_group', {
             'type': 'game_round_message',
-            'game_round': roundWinColor_data
+            'game_round': roundWinAll_data
         }
     )
 

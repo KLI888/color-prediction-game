@@ -104,7 +104,8 @@ class RoundWinNumber(models.Model):
         ('9', '9'),
     ]
     round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
-    win_number = models.CharField(max_length=10, choices=NUMBER_CHOICES, blank=True, null=True)
+    default_number = str(random.randint(0, 9))
+    win_number = models.CharField(max_length=10, choices=NUMBER_CHOICES, blank=True, default=default_number)
 
     zero_bet_amount = models.IntegerField(default=0)
     one_bet_amount = models.IntegerField(default=0)
@@ -128,7 +129,7 @@ class RoundWinSize(models.Model):
         ('Small', 'Small'),
     ]
     round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
-    win_size = models.CharField(max_length=10, choices=SIZE_CHOICES, blank=True, null=True)
+    win_size = models.CharField(max_length=10, choices=SIZE_CHOICES, blank=True, default="Small")
     big_bet_amount = models.IntegerField(default=0)
     small_bet_amount = models.IntegerField(default=0)
     violet_bet_amount = models.IntegerField(default=0)
@@ -146,7 +147,7 @@ class RoundWinColor(models.Model):
     ]
     round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
 
-    win_color = models.CharField(max_length=10, choices=COLOR_CHOICES, blank=True, null=True)
+    win_color = models.CharField(max_length=10, choices=COLOR_CHOICES, blank=True, default="Violet")
     red_bet_amount = models.IntegerField(default=0)
     green_bet_amount = models.IntegerField(default=0)
     violet_bet_amount = models.IntegerField(default=0)
