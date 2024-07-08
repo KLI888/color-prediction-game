@@ -271,7 +271,7 @@ def test_func(self):
     async_to_sync(channel_layer.group_send)(
         'test_consumer_group', {
             'type': 'game_round_result',
-            'game_round': roundWinAll_data
+            'game_result_data': roundWinAll_data
         }
     )
 
