@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from .utils import generate_ref_code
 
+import random
 
 # Create your models here.
 class Profile(models.Model):
