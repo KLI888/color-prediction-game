@@ -313,6 +313,10 @@ def user_bet_number(request):
 
 
 
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Profile, GameRound, Bet, RoundWinSize
 
 @csrf_exempt
 def user_bet_size(request):
@@ -324,11 +328,11 @@ def user_bet_size(request):
             round_id = data.get('id')
             bet_size = data.get('bet_size')
             bet_amount = data.get('total_amount_size')
-            bet_amount = int(bet_amount)
+            bet_amount = float(bet_amount)  # Convert to float if necessary
 
             game_round = GameRound.objects.get(game_id=round_id)
 
-            print(f"Received bet_number: {bet_size}")
+            print(f"Received bet_size: {bet_size}")
             print(f"Received bet_amount: {bet_amount}")
 
             if profile.user_balance >= bet_amount:
@@ -336,18 +340,18 @@ def user_bet_size(request):
                 profile.user_balance -= bet_amount
                 profile.save()
 
-                round_win_size = RoundWinSize.objects.get(round=game_round)
+                round_win_size= RoundWinSize.objects.get(round=game_round)
 
-                # Update the corresponding bet amount
+                # Update the corresponding bet amount based on bet_size
                 if bet_size == "Big":
-                    round_win_size.big_bet_amount += bet_amount
+                    round_win_size.big_bet_amount += int(bet_amount)
                 elif bet_size == "Small":
-                    round_win_size.small_bet_amount += bet_amount
+                    round_win_size.small_bet_amount += int(bet_amount)
                 else:
-                    print(f"Invalid bet number received: {bet_number}")
+                    print(f"Invalid bet size received: {bet_size}")
                     return JsonResponse({'error': 'Invalid bet size'}, status=400)
 
-                round_win_number.save()
+                round_win_size.save()
 
                 return JsonResponse({'message': 'success'})
             else:
