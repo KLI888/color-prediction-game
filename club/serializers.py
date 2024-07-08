@@ -46,4 +46,9 @@ class GameWinSerializer(serializers.ModelSerializer):
         fields = ('id', 'game_id', 'roundWinColor', 'roundWinSize', 'roundWinNumber')
 
     def get_game_id(self, obj):
-        return obj.round.game_id
+        return {
+            'game_id': obj.round.game_id,
+            'win_color': obj.roundWinColor.win_color,
+            'win_size': obj.roundWinSize.win_size,
+            'win_number': obj.roundWinNumber.win_number
+        }
