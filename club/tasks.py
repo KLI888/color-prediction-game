@@ -115,7 +115,7 @@ def test_func(self):
     
     roundWinColor = RoundWinColor.objects.create(round=game_round)
     roundWinNumber = RoundWinNumber.objects.create(round=game_round)
-    # roundWinSize = RoundWinSize.objects.create(round=game_round)
+    roundWinSize = RoundWinSize.objects.create(round=game_round)
 
     def updateBalance(winning_color):
         try:
@@ -171,10 +171,37 @@ def test_func(self):
             print(f"Error: {e}")
 
 
+    def updateBalanceSize(winning_size):
+        try:
+            bets_on_round = Bet.objects.filter(round=game_round, size=winning_size).select_related('user')
+            user_bets = []
+            for bet in bets_on_round:
+                user_bets.append({
+                    'user_id': bet.user.id,
+                    'username': bet.user.username,
+                    'bet_size': bet.size,
+                    'bet_amount': bet.amount
+                })
+            print("Data filled in user_bets successfully")
+
+            for user_bet in user_bets:
+                user = User.objects.get(id=user_bet['user_id'])
+                profile = Profile.objects.get(user=user)
+                bet_amount = int(user_bet['bet_amount'])
+                new_balance = bet_amount * 2 if user_bet['bet_size'] == winning_number else 0
+                profile.user_balance += new_balance
+                profile.total_balance += new_balance
+                profile.save()
+            print("Data updated to user profile successfully")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+
     time.sleep(26)
 
 
-    # selecting the winning color
+    ## selecting the winning color
     roundWinColor = RoundWinColor.objects.get(round=game_round)
     green_amount = roundWinColor.green_bet_amount
     red_amount = roundWinColor.red_bet_amount
@@ -194,7 +221,7 @@ def test_func(self):
     updateBalance(winning_color)
 
 
-    # selecting the winning number
+    ## selecting the winning number
     roundWinNumber = RoundWinNumber.objects.get(round=game_round)
 
     # Extracting the bet amounts and mapping them to their corresponding numbers
@@ -224,6 +251,16 @@ def test_func(self):
     updateBalanceNumber(roundWinNumber.win_number)
     print(f"The first minimum bet amount is: {min_amount}, corresponding to number: {winning_number}")
 
+
+    ## selecting the winning size
+    roundWinSize = RoundWinSize.objects.get(round=game_round)
+    if roundWinSize.big_bet_amount < roundWinSize.small_bet_amount:
+        winning_size = "Big"
+    else:
+        winning_size = "Small"
+    roundWinSize.win_size = winning_size
+    roundWinSize.save()
+    updateBalanceSize(winning_size)
 
 
 

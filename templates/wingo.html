@@ -314,7 +314,7 @@
                     <div class="buy_form">
                         <div class="buy_heading">
                             <h3>Win Go 30Seconds</h3>
-                            <input type="hidden" name="" value="" id="selected_size_input">
+                            <input type="hidden" name="bet_size" value="" id="selected_size_input">
                             <p>Selected: <span id="selected_size">None</span></p>
                         </div>
 
@@ -422,7 +422,7 @@
                 });
         });
 
-
+        // buy form submit for number
         document.getElementById('buy_btn_total_number').addEventListener('click', () => {
             let amount = document.getElementById('total_amount_number').value;
             let bet_number = document.getElementById('selected_number_input').value;
@@ -452,6 +452,39 @@
                     console.log("Error placing bet");
                 });
         });
+
+        
+        // buy form submit for size
+        document.getElementById('buy_btn_total_size').addEventListener('click', () => {
+            let amount = document.getElementById('total_amount_size').value;
+            let bet_size = document.getElementById('selected_number_size').value;
+            let round_id = document.getElementById('game_id').value;
+
+            console.log(`Sending bet_number: ${bet_size}`);
+            console.log(`Sending amount: ${amount}`);
+
+            axios.post('/api/game_bet_size', { id: round_id, total_amount_size: amount, bet_size: bet_size })
+                .then(response => {
+                    console.log('Bet response:', response.data);
+                    console.log("Bet Placed");
+                })
+                .catch(error => {
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        console.error('Error response data:', error.response.data);
+                        console.error('Error response status:', error.response.status);
+                        console.error('Error response headers:', error.response.headers);
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        console.error('Error request:', error.request);
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.error('Error message:', error.message);
+                    }
+                    console.log("Error placing bet");
+                });
+        });
+
 
 
         function startCountdown(timerElement, duration) {

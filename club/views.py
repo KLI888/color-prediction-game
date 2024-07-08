@@ -310,3 +310,57 @@ def user_bet_number(request):
             return JsonResponse({'error': str(e)}, status=500)
     
     return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+
+
+@csrf_exempt
+def user_bet_size(request):
+    if request.method == 'POST':
+        try:
+            user = request.user
+            data = json.loads(request.body.decode('utf-8'))
+            profile = Profile.objects.get(user=user)
+            round_id = data.get('id')
+            bet_size = data.get('bet_size')
+            bet_amount = data.get('total_amount_size')
+            bet_amount = int(bet_amount)
+
+            game_round = GameRound.objects.get(game_id=round_id)
+
+            print(f"Received bet_number: {bet_size}")
+            print(f"Received bet_amount: {bet_amount}")
+
+            if profile.user_balance >= bet_amount:
+                bet = Bet.objects.create(user=user, round=game_round, size=bet_size, amount=bet_amount)
+                profile.user_balance -= bet_amount
+                profile.save()
+
+                round_win_size = RoundWinSize.objects.get(round=game_round)
+
+                # Update the corresponding bet amount
+                if bet_size == "Big":
+                    round_win_size.big_bet_amount += bet_amount
+                elif bet_size == "Small":
+                    round_win_size.small_bet_amount += bet_amount
+                else:
+                    print(f"Invalid bet number received: {bet_number}")
+                    return JsonResponse({'error': 'Invalid bet size'}, status=400)
+
+                round_win_number.save()
+
+                return JsonResponse({'message': 'success'})
+            else:
+                return JsonResponse({'message': 'error insufficient balance'})
+
+        except GameRound.DoesNotExist:
+            return JsonResponse({'error': 'Game round does not exist'}, status=404)
+        
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': 'User profile does not exist'}, status=404)
+
+        except Exception as e:
+            print(f"Unexpected error: {str(e)}")
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
