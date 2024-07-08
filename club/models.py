@@ -127,6 +127,7 @@ class RoundWinSize(models.Model):
         ('Big', 'Big'),
         ('Small', 'Small'),
     ]
+    round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
     win_size = models.CharField(max_length=10, choices=SIZE_CHOICES, blank=True, null=True)
     big_bet_amount = models.IntegerField(default=0)
     small_bet_amount = models.IntegerField(default=0)
