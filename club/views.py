@@ -244,6 +244,10 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Profile, GameRound, Bet, RoundWinNumber
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Profile, GameRound, Bet, RoundWinNumber
 
 @csrf_exempt
 def user_bet_number(request):
@@ -253,7 +257,7 @@ def user_bet_number(request):
             data = json.loads(request.body.decode('utf-8'))
             profile = Profile.objects.get(user=user)
             round_id = data.get('id')
-            bet_number = data.get('selected_number_input')
+            bet_number = data.get('bet_number')
             bet_amount = data.get('total_amount_number')
             bet_amount = int(bet_amount)
 
@@ -305,6 +309,7 @@ def user_bet_number(request):
             return JsonResponse({'error': 'User profile does not exist'}, status=404)
 
         except Exception as e:
+            print(f"Unexpected error: {str(e)}")
             return JsonResponse({'error': str(e)}, status=500)
     
     return JsonResponse({'error': 'Invalid request method'}, status=405)
