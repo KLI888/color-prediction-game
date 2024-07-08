@@ -425,7 +425,7 @@
         // buy form submit for number
         document.getElementById('buy_btn_total_number').addEventListener('click', () => {
             let amount = document.getElementById('total_amount_number').value;
-            let bet_number = document.getElementById('selected_size_input').value;
+            let bet_number = document.getElementById('selected_number_input').value;
             let round_id = document.getElementById('game_id').value;
 
             console.log(`Sending bet_number: ${bet_number}`);
@@ -457,7 +457,7 @@
         // buy form submit for size
         document.getElementById('buy_btn_total_size').addEventListener('click', () => {
             let amount = document.getElementById('total_amount_size').value;
-            let bet_size = document.getElementById('selected_number_size').value;
+            let bet_size = document.getElementById('selected_size_input').value;
             let round_id = document.getElementById('game_id').value;
 
             console.log(`Sending bet_number: ${bet_size}`);
