@@ -18,9 +18,8 @@ class GameRoundSerializer(serializers.ModelSerializer):
 #         return obj.round.game_id
 
 
-
 from rest_framework import serializers
-from .models import RoundWinAll, RoundWinColor, RoundWinSize, RoundWinNumber
+from .models import RoundWinColor, RoundWinSize, RoundWinNumber, RoundWinAll
 
 class RoundWinColorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,7 +37,6 @@ class RoundWinNumberSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class GameWinSerializer(serializers.ModelSerializer):
-    game_id = serializers.SerializerMethodField()
     roundWinColor = RoundWinColorSerializer()
     roundWinSize = RoundWinSizeSerializer()
     roundWinNumber = RoundWinNumberSerializer()

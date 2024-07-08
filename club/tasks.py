@@ -246,7 +246,7 @@ def test_func(self):
         if amount == min_amount:
             winning_number = number
             break
-    roundWinNumber.win_number = str(roundWinNumber)
+    roundWinNumber.win_number = str(winning_number)
     roundWinNumber.save()
     updateBalanceNumber(roundWinNumber.win_number)
     print(f"The first minimum bet amount is: {min_amount}, corresponding to number: {winning_number}")
