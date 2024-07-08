@@ -265,21 +265,21 @@ def user_bet_number(request):
                 round_win_number = RoundWinNumber.objects.get(round=game_round.id)
                 if bet_number == "0":
                     round_win_number.zero_bet_amount += bet_amount
-                elif bet_color == "1":
+                elif bet_number == "1":
                     round_win_number.one_bet_amount += bet_amount
-                elif bet_color == "2":
+                elif bet_number == "2":
                     round_win_number.two_bet_amount += bet_amount
-                elif bet_color == "3":
+                elif bet_number == "3":
                     round_win_number.three_bet_amount += bet_amount
-                elif bet_color == "4":
+                elif bet_number == "4":
                     round_win_number.four_bet_amount += bet_amount
-                elif bet_color == "5":
+                elif bet_number == "5":
                     round_win_number.five_bet_amount += bet_amount
-                elif bet_color == "6":
+                elif bet_number == "6":
                     round_win_number.six_bet_amount += bet_amount
-                elif bet_color == "7":
+                elif bet_number == "7":
                     round_win_number.seven_bet_amount += bet_amount
-                elif bet_color == "8":
+                elif bet_number == "8":
                     round_win_number.eight_bet_amount += bet_amount
                 else:
                     round_win_color.nine_bet_amount += bet_amount
