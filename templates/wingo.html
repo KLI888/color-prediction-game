@@ -456,7 +456,7 @@
         
         // buy form submit for size
         document.getElementById('buy_btn_total_size').addEventListener('click', () => {
-            let amount = parseFloat(document.getElementById('total_amount_size').value);  // Ensure amount is parsed as float
+            let amount = document.getElementById('total_amount_size').value;  // Ensure amount is parsed as float
             let bet_size = document.getElementById('selected_size_input').value;
             let round_id = document.getElementById('game_id').value;
 

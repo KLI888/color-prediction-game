@@ -328,7 +328,7 @@ def user_bet_size(request):
             round_id = data.get('id')
             bet_size = data.get('bet_size')
             bet_amount = data.get('total_amount_size')
-            bet_amount = float(bet_amount)  # Convert to float if necessary
+            bet_amount = bet_amount  # Convert to float if necessary
 
             game_round = GameRound.objects.get(game_id=round_id)
 
