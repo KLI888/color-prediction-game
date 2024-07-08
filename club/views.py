@@ -239,11 +239,6 @@ def user_bet(request):
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
-
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from .models import Profile, GameRound, Bet, RoundWinNumber
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -263,7 +258,8 @@ def user_bet_number(request):
 
             game_round = GameRound.objects.get(game_id=round_id)
 
-            print("Bet is being placed...")
+            print(f"Received bet_number: {bet_number}")
+            print(f"Received bet_amount: {bet_amount}")
 
             if profile.user_balance >= bet_amount:
                 bet = Bet.objects.create(user=user, round=game_round, number=bet_number, amount=bet_amount)
@@ -294,6 +290,7 @@ def user_bet_number(request):
                 elif bet_number == "9":
                     round_win_number.nine_bet_amount += bet_amount
                 else:
+                    print(f"Invalid bet number received: {bet_number}")
                     return JsonResponse({'error': 'Invalid bet number'}, status=400)
 
                 round_win_number.save()
