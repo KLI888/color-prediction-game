@@ -29,5 +29,6 @@ urlpatterns = [
 
 
     # game api
-    path('api/game_bet', user_bet, name='user_bet')
+    path('api/game_bet', user_bet, name='user_bet'),
+    path('api/game_bet_number', user_bet_number, name='user_bet_number')
 ]

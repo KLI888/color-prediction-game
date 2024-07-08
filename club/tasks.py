@@ -143,7 +143,38 @@ def test_func(self):
         except Exception as e:
             print(f"Error: {e}")
 
+
+    def updateBalanceNumber(winning_number):
+        try:
+            bets_on_round = Bet.objects.filter(round=game_round, number=winning_number).select_related('user')
+            user_bets = []
+            for bet in bets_on_round:
+                user_bets.append({
+                    'user_id': bet.user.id,
+                    'username': bet.user.username,
+                    'bet_number': bet.number,
+                    'bet_amount': bet.amount
+                })
+            print("Data filled in user_bets successfully")
+
+            for user_bet in user_bets:
+                user = User.objects.get(id=user_bet['user_id'])
+                profile = Profile.objects.get(user=user)
+                bet_amount = int(user_bet['bet_amount'])
+                new_balance = bet_amount * 2 if user_bet['bet_number'] == winning_number else 0
+                profile.user_balance += new_balance
+                profile.total_balance += new_balance
+                profile.save()
+            print("Data updated to user profile successfully")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+
     time.sleep(26)
+
+
+    # selecting the winning color
     roundWinColor = RoundWinColor.objects.get(round=game_round)
     green_amount = roundWinColor.green_bet_amount
     red_amount = roundWinColor.red_bet_amount
@@ -158,11 +189,45 @@ def test_func(self):
     else:
         winning_color = "Violet"
     print("Winning color choosing complete")
-
-
     roundWinColor.win_color = winning_color
     roundWinColor.save()
     updateBalance(winning_color)
+
+
+    # selecting the winning number
+    roundWinNumber = RoundWinNumber.objects.get(round=game_round)
+
+    # Extracting the bet amounts and mapping them to their corresponding numbers
+    amounts = {
+        0: roundWinNumber.zero_bet_amount,
+        1: roundWinNumber.one_bet_amount,
+        2: roundWinNumber.two_bet_amount,
+        3: roundWinNumber.three_bet_amount,
+        4: roundWinNumber.four_bet_amount,
+        5: roundWinNumber.five_bet_amount,
+        6: roundWinNumber.six_bet_amount,
+        7: roundWinNumber.seven_bet_amount,
+        8: roundWinNumber.eight_bet_amount,
+        9: roundWinNumber.nine_bet_amount,
+    }
+
+    # Finding the minimum value
+    min_amount = min(amounts.values())
+
+    # Finding the number corresponding to the first occurrence of the minimum value
+    for number, amount in amounts.items():
+        if amount == min_amount:
+            winning_number = number
+            break
+    roundWinNumber.win_number = str(roundWinNumber)
+    roundWinNumber.save()
+    updateBalanceNumber(roundWinNumber.win_number)
+    print(f"The first minimum bet amount is: {min_amount}, corresponding to number: {winning_number}")
+
+
+
+
+
     serializer = GameWin(roundWinColor)
     roundWinColor_data = serializer.data
     async_to_sync(channel_layer.group_send)(

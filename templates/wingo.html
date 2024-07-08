@@ -259,11 +259,11 @@
         </div>
         <div class="buy_form_div_number" id="buy_form_div_number">
             <section id="buy_color_form" class="buy_form_color">
-                <form action="">
+                <form id="buy_form_number" action="">
                     <div class="buy_form">
                         <div class="buy_heading">
                             <h3>Win Go 30Seconds</h3>
-                            <input type="hidden" name="" value="" id="selected_number_input">
+                            <input type="hidden" name="bet_number" value="" id="selected_number_input">
                             <p>Selected: <span id="selected_number">None</span></p>
                         </div>
 
@@ -301,7 +301,7 @@
                         <div class="buy_btn">
                             <p id="form_cancle_number">Cancle</p>
                             <input type="hidden" name="total_amount_number" value="1" id="total_amount_number">
-                            <input id="buy_btn_total_number" type="submit" value="Total amount ₹1.00">
+                            <input id="buy_btn_total_number" type="number" value="Total amount ₹1.00">
                         </div>
                     </div>
                 </form>
@@ -404,6 +404,8 @@
         };
 
 
+
+        // buy form submit for color
         document.getElementById('buy_btn_total').addEventListener('click', () => {
             let amount = document.getElementById('total_amount').value;
             let bet_color = document.getElementById('selected_color_input').value;
@@ -412,17 +414,33 @@
             axios.post('/api/game_bet', { id: round_id, total_amount: amount, bet_color: bet_color })
                 .then(response => {
                     console.log('Bet response:', response.data);
-                    // Handle success response here, e.g., show message to user
-                    // alert('Bet placed successfully!');
                     console.log("Bet Placed")
                 })
                 .catch(error => {
                     console.error('Error making bet request:', error);
-                    // Handle error response here, e.g., show error message to user
                     console.log("Error placing bet")
-                    // alert('Error placing bet: ' + error.message);
                 });
         });
+
+
+        // buy form submit for number
+        document.getElementById('buy_btn_total_number').addEventListener('click', () => {
+            let amount = document.getElementById('total_amount').value;
+            let bet_color = document.getElementById('selected_number_input').value;
+            let round_id = document.getElementById('game_id').value;
+
+            axios.post('/api/game_bet_number', { id: round_id, total_amount: amount, bet_color: bet_color })
+                .then(response => {
+                    console.log('Bet response:', response.data);
+                    console.log("Bet Placed")
+                })
+                .catch(error => {
+                    console.error('Error making bet request:', error);
+                    console.log("Error placing bet")
+                });
+        });
+
+
 
         function startCountdown(timerElement, duration) {
             let time = duration;

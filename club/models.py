@@ -166,7 +166,9 @@ class RoundWinAll(models.Model):
 class Bet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
-    color = models.CharField(max_length=10, default='red')
+    color = models.CharField(max_length=10, null=True, blank=True)
+    number = models.CharField(max_length=10, blank=True, null=True)
+    size = models.CharField(max_length=10, null=True, blank=True)
     amount = models.IntegerField(default=0)
 
     def __str__(self):

@@ -237,3 +237,65 @@ def user_bet(request):
             return JsonResponse({'error': str(e)}, status=500)
     
     return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+
+
+@csrf_exempt
+def user_bet_number(request):
+    if request.method == 'POST':
+        try:
+            user = request.user
+            data = json.loads(request.body.decode('utf-8'))
+            profile = Profile.objects.get(user=user)
+            round_id = data.get('id')
+            bet_number = data.get('bet_number')
+            bet_amount = data.get('total_amount_number')
+            bet_amount = int(bet_amount)
+
+            game_round = GameRound.objects.get(game_id=round_id)
+
+            print("Bet is places hererrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+            
+            if profile.user_balance >= bet_amount:
+                bet = Bet.objects.create(user=user, round=game_round, number=bet_number, amount=bet_amount)
+                bet.save()
+                profile.user_balance -= bet_amount
+                profile.save()
+                round_win_number = RoundWinNumber.objects.get(round=game_round.id)
+                if bet_number == "0":
+                    round_win_number.zero_bet_amount += bet_amount
+                elif bet_color == "1":
+                    round_win_number.one_bet_amount += bet_amount
+                elif bet_color == "2":
+                    round_win_number.two_bet_amount += bet_amount
+                elif bet_color == "3":
+                    round_win_number.three_bet_amount += bet_amount
+                elif bet_color == "4":
+                    round_win_number.four_bet_amount += bet_amount
+                elif bet_color == "5":
+                    round_win_number.five_bet_amount += bet_amount
+                elif bet_color == "6":
+                    round_win_number.six_bet_amount += bet_amount
+                elif bet_color == "7":
+                    round_win_number.seven_bet_amount += bet_amount
+                elif bet_color == "8":
+                    round_win_number.eight_bet_amount += bet_amount
+                else:
+                    round_win_color.nine_bet_amount += bet_amount
+                round_win_number.save()
+                
+                return JsonResponse({'message': 'success'})
+            else:
+                return JsonResponse({'message': 'error insufficient balance'})
+        
+        except GameRound.DoesNotExist:
+            return JsonResponse({'error': 'Game round does not exist'}, status=404)
+        
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': 'User profile does not exist'}, status=404)
+        
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
