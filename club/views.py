@@ -212,7 +212,7 @@ def user_bet(request):
                 bet.save()
                 profile.user_balance -= bet_amount
                 profile.save()
-                round_win_color = RoundWinColor.objects.get(round=game_round)
+                round_win_color = RoundWinColor.objects.get(round=game_round.id)
                 if bet_color == "Green":
                     round_win_color.green_bet_amount += bet_amount
                 elif bet_color == "Violet":

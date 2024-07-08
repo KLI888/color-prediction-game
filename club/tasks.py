@@ -114,8 +114,8 @@ def test_func(self):
     )
     
     roundWinColor = RoundWinColor.objects.create(round=game_round)
-    roundWinNumber = RoundWinNumber.objects.create(round=game_round)
-    roundWinSize = RoundWinSize.objects.create(round=game_round)
+    # roundWinNumber = RoundWinNumber.objects.create(round=game_round)
+    # roundWinSize = RoundWinSize.objects.create(round=game_round)
 
     def updateBalance(winning_color):
         try:

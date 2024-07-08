@@ -414,10 +414,12 @@
                     console.log('Bet response:', response.data);
                     // Handle success response here, e.g., show message to user
                     // alert('Bet placed successfully!');
+                    console.log("Bet Placed")
                 })
                 .catch(error => {
                     console.error('Error making bet request:', error);
                     // Handle error response here, e.g., show error message to user
+                    console.log("Error placing bet")
                     // alert('Error placing bet: ' + error.message);
                 });
         });
