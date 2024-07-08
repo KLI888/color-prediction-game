@@ -206,6 +206,8 @@ def user_bet(request):
             bet_amount = int(bet_amount)
 
             game_round = GameRound.objects.get(game_id=round_id)
+
+            print("Bet is places hererrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
             
             if profile.user_balance >= bet_amount:
                 bet = Bet.objects.create(user=user, round=game_round, color=bet_color, amount=bet_amount)

@@ -149,6 +149,7 @@ def test_func(self):
     red_amount = roundWinColor.red_bet_amount
     violet_amount = roundWinColor.violet_bet_amount
 
+    print("Winning color choosing here")
     winning_color = ""
     if green_amount < red_amount and green_amount < violet_amount:
         winning_color = "Green"
@@ -156,6 +157,8 @@ def test_func(self):
         winning_color = "Red"
     else:
         winning_color = "Violet"
+    print("Winning color choosing complete")
+
 
     roundWinColor.win_color = winning_color
     roundWinColor.save()
