@@ -116,6 +116,7 @@ def test_func(self):
     roundWinColor = RoundWinColor.objects.create(round=game_round)
     roundWinNumber = RoundWinNumber.objects.create(round=game_round)
     roundWinSize = RoundWinSize.objects.create(round=game_round)
+    roundWinAll = RoundWinAll.objects.create(round=game_round)
 
     def updateBalance(winning_color):
         try:
@@ -265,7 +266,10 @@ def test_func(self):
 
 
 
-    roundWinAll = RoundWinAll.objects.create(round=game_round, win_color=winning_color, win_number=winning_number, win_size=winning_size)
+    roundWinAll = RoundWinAll.objects.get(round=game_round)
+    roundWinAll.win_color = winning_color
+    roundWinAll.win_number = winning_number
+    roundWinAll.win_size = winning_size
     serializer = GameWinSerializer(roundWinAll)
     roundWinAll_data = serializer.data
     async_to_sync(channel_layer.group_send)(
