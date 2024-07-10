@@ -90,6 +90,8 @@ class GameRound(models.Model):
         return f"{self.game_id}->{self.start_hour}:{self.start_minute}:{self.start_second}"
     
             
+import random
+from django.db import models
 
 class RoundWinNumber(models.Model):
     NUMBER_CHOICES = [
@@ -105,8 +107,11 @@ class RoundWinNumber(models.Model):
         ('9', '9'),
     ]
     round = models.ForeignKey(GameRound, on_delete=models.CASCADE)
-    default_number = str(random.randint(0, 9))
-    win_number = models.CharField(max_length=10, choices=NUMBER_CHOICES, blank=True, default=default_number)
+
+    def generate_default_number():
+        return str(random.randint(0, 9))
+
+    win_number = models.CharField(max_length=10, choices=NUMBER_CHOICES, blank=True, default=generate_default_number)
 
     zero_bet_amount = models.IntegerField(default=0)
     one_bet_amount = models.IntegerField(default=0)
@@ -119,10 +124,9 @@ class RoundWinNumber(models.Model):
     eight_bet_amount = models.IntegerField(default=0)
     nine_bet_amount = models.IntegerField(default=0)
 
-
     def __str__(self):
         return f"Round: {self.round.game_id}"
-    
+   
 
 class RoundWinSize(models.Model):
     SIZE_CHOICES = [
