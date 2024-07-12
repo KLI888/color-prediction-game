@@ -36,10 +36,15 @@ class RoundWinNumberSerializer(serializers.ModelSerializer):
         model = RoundWinNumber
         fields = '__all__'
 
+from rest_framework import serializers
+from .models import RoundWinAll
+
 class GameWinSerializer(serializers.ModelSerializer):
+    game_id = serializers.SerializerMethodField()
+
     class Meta:
         model = RoundWinAll
-        fields = ('id', 'round', 'win_color', 'win_number', 'win_size')
+        fields = ('game_id', 'round', 'win_color', 'win_number', 'win_size')
 
     def get_game_id(self, obj):
         return obj.round.game_id

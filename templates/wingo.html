@@ -512,7 +512,6 @@
             timeDivs[4].textContent = secondOnes;
         }
     </script>
-
 <script>
     const winSocket = new WebSocket(
         'ws://' + window.location.host + '/ws/game_result/'
@@ -523,25 +522,29 @@
             const data = JSON.parse(e.data);
             console.log("Received message:", data);
 
-            if (data.game_round) {
+            if (data.game_result_data) {
                 const gameRound = data.game_result_data;
-                console.log("Game ID:", gameRound.id);
-                console.log("Win color:", gameRound.win_color);
-                console.log("Win number:", gameRound.win_number);
-                console.log("Win size:", gameRound.win_size);
 
-                // Update DOM elements with received data
-                document.getElementById('round_id').innerText = gameRound.id;
-                document.getElementById('win_color').innerText = gameRound.win_color;
-                document.getElementById('win_number').innerText = gameRound.win_number;
-                document.getElementById('win_size').innerText = gameRound.win_size;
+                if (gameRound) {
+                    console.log("Win color:", gameRound.win_color);
+                    console.log("Win number:", gameRound.win_number);
+                    console.log("Win size:", gameRound.win_size);
+                    console.log("Game ID:", gameRound.game_id);
 
-                // Optionally, update hidden input for game_id
-                document.getElementById('game_id').value = gameRound.game_id;
+                    // Update DOM elements with received data
+                    document.getElementById('win_color').innerText = gameRound.win_color || 'N/A';
+                    document.getElementById('win_number').innerText = gameRound.win_number || 'N/A';
+                    document.getElementById('win_size').innerText = gameRound.win_size || 'N/A';
 
-                console.log("Updated values");
+                    // Optionally, update hidden input for game_id
+                    document.getElementById('game_id').value = gameRound.game_id || 'N/A';
+
+                    console.log("Updated values");
+                } else {
+                    console.error("gameRound is undefined or null");
+                }
             } else {
-                console.error("game_round is undefined");
+                console.error("game_result_data is undefined");
             }
         } catch (error) {
             console.error("Error parsing message:", error);
@@ -552,6 +555,7 @@
         console.error('Winner socket closed unexpectedly');
     };
 </script>
+
 
 
     <!-- color bet form  -->
