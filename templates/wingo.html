@@ -386,6 +386,7 @@
                 game_round_id = data.game_round.game_id; // Update game_round_id
 
                 document.getElementById('game_round_id').innerText = data.game_round.game_id;
+                document.getElementById('game_id').value = data.game_round.game_id
                 const timerElement = document.getElementsByClassName('ticket_time')[0];
 
                 // Clear the previous countdown interval if it exists
@@ -512,49 +513,49 @@
             timeDivs[4].textContent = secondOnes;
         }
     </script>
-<script>
-    const winSocket = new WebSocket(
-        'ws://' + window.location.host + '/ws/game_result/'
-    );
+    <script>
+        const winSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/game_result/'
+        );
 
-    winSocket.onmessage = function (e) {
-        try {
-            const data = JSON.parse(e.data);
-            console.log("Received message:", data);
+        winSocket.onmessage = function (e) {
+            try {
+                const data = JSON.parse(e.data);
+                console.log("Received message:", data);
 
-            if (data.game_result_data) {
-                const gameRound = data.game_result_data;
+                if (data.game_result_data) {
+                    const gameRound = data.game_result_data;
 
-                if (gameRound) {
-                    console.log("Win color:", gameRound.win_color);
-                    console.log("Win number:", gameRound.win_number);
-                    console.log("Win size:", gameRound.win_size);
-                    console.log("Game ID:", gameRound.game_id);
+                    if (gameRound) {
+                        console.log("Win color:", gameRound.win_color);
+                        console.log("Win number:", gameRound.win_number);
+                        console.log("Win size:", gameRound.win_size);
+                        console.log("Game ID:", gameRound.game_id);
 
-                    // Update DOM elements with received data
-                    document.getElementById('win_color').innerText = gameRound.win_color || 'N/A';
-                    document.getElementById('win_number').innerText = gameRound.win_number || 'N/A';
-                    document.getElementById('win_size').innerText = gameRound.win_size || 'N/A';
+                        // Update DOM elements with received data
+                        document.getElementById('win_color').innerText = gameRound.win_color || 'N/A';
+                        document.getElementById('win_number').innerText = gameRound.win_number || 'N/A';
+                        document.getElementById('win_size').innerText = gameRound.win_size || 'N/A';
 
-                    // Optionally, update hidden input for game_id
-                    document.getElementById('round_id').innerText = gameRound.game_id || 'N/A';
+                        // Optionally, update hidden input for game_id
+                        document.getElementById('round_id').innerText = gameRound.game_id || 'N/A';
 
-                    console.log("Updated values");
+                        console.log("Updated values");
+                    } else {
+                        console.error("gameRound is undefined or null");
+                    }
                 } else {
-                    console.error("gameRound is undefined or null");
+                    console.error("game_result_data is undefined");
                 }
-            } else {
-                console.error("game_result_data is undefined");
+            } catch (error) {
+                console.error("Error parsing message:", error);
             }
-        } catch (error) {
-            console.error("Error parsing message:", error);
-        }
-    };
+        };
 
-    winSocket.onclose = function (e) {
-        console.error('Winner socket closed unexpectedly');
-    };
-</script>
+        winSocket.onclose = function (e) {
+            console.error('Winner socket closed unexpectedly');
+        };
+    </script>
 
 
 
