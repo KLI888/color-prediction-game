@@ -175,7 +175,7 @@ def feedbackPage(request):
 @login_required
 def wingoPage(request):
     profile = Profile.objects.get(user=request.user)
-    round_results = RoundWinAll.objects.all()
+    round_results = RoundWinAll.objects.all()[::-1]
     paginator = Paginator(round_results, 10)  # Show 10 round results per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
