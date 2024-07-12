@@ -525,13 +525,13 @@
 
             if (data.game_round) {
                 const gameRound = data.game_result_data;
-                console.log("Game ID:", gameRound.game_id);
+                console.log("Game ID:", gameRound.id);
                 console.log("Win color:", gameRound.win_color);
                 console.log("Win number:", gameRound.win_number);
                 console.log("Win size:", gameRound.win_size);
 
                 // Update DOM elements with received data
-                document.getElementById('round_id').innerText = gameRound.game_id;
+                document.getElementById('round_id').innerText = gameRound.id;
                 document.getElementById('win_color').innerText = gameRound.win_color;
                 document.getElementById('win_number').innerText = gameRound.win_number;
                 document.getElementById('win_size').innerText = gameRound.win_size;
