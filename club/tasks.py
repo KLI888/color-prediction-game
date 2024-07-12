@@ -270,6 +270,9 @@ def test_func(self):
     roundWinAll.win_color = winning_color
     roundWinAll.win_number = winning_number
     roundWinAll.win_size = winning_size
+    print(winning_color)
+    print(winning_number)
+    print(winning_size)
     serializer = GameWinSerializer(roundWinAll)
     roundWinAll_data = serializer.data
     async_to_sync(channel_layer.group_send)(

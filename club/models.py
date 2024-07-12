@@ -171,7 +171,7 @@ class RoundWinAll(models.Model):
 
     def __str__(self):
         return f"Round Win {self.round.game_id}"
-    
+
 
 class Bet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
