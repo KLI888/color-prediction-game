@@ -175,10 +175,10 @@
                         <!-- Add more rows as needed -->
                         {% for result in page_obj %}
                         <tr>
-                            <td id="round_id">{{ result.round.game_id }}</td>
-                            <td></td>
-                            <td></td>
-                            <td id="win_color"> {{ result.win_color }}</td>
+                            <td id="">{{ result.round.game_id }}</td>
+                            <td>{{ result.round.win_number }}</td>
+                            <td>{{ result.round.win_size }}</td>
+                            <td id=""> {{ result.win_color }}</td>
                         </tr>
                         {% endfor %}
 
