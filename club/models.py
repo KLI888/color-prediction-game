@@ -170,7 +170,7 @@ class RoundWinAll(models.Model):
     win_size = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return f"Round Win {round}: {win_color}, {win_color}, {win_color}"
+        return f"Round Win {round.game_id}"
     
 
 class Bet(models.Model):
