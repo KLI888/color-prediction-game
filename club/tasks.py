@@ -270,6 +270,7 @@ def test_func(self):
     roundWinAll.win_color = winning_color
     roundWinAll.win_number = winning_number
     roundWinAll.win_size = winning_size
+    roundWinAll.save()
     print(winning_color)
     print(winning_number)
     print(winning_size)
