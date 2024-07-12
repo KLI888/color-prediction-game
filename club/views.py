@@ -269,7 +269,7 @@ def user_bet_number(request):
                 round_win_number = RoundWinNumber.objects.get(round=game_round)
 
                 # Update the corresponding bet amount
-                if bet_number == 0:
+                if bet_number == "0":
                     round_win_number.zero_bet_amount += bet_amount
                 elif bet_number == "1":
                     round_win_number.one_bet_amount += bet_amount
