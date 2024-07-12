@@ -176,8 +176,8 @@
                         {% for result in page_obj %}
                         <tr>
                             <td id="">{{ result.round.game_id }}</td>
-                            <td>{{ result.round.win_number }}</td>
-                            <td>{{ result.round.win_size }}</td>
+                            <td>{{ result.win_number }}</td>
+                            <td>{{ result.win_size }}</td>
                             <td id=""> {{ result.win_color }}</td>
                         </tr>
                         {% endfor %}
