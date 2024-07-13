@@ -199,7 +199,7 @@ def test_func(self):
             print(f"Error: {e}")
 
 
-    time.sleep(29)
+    time.sleep(30)
 
 
     ## selecting the winning color
